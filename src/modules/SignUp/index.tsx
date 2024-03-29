@@ -6,7 +6,6 @@ import {
   Button,
   Grid,
   IconButton,
-  InputAdornment,
   TextField,
   Typography,
 } from "@mui/material";
@@ -16,6 +15,8 @@ import { useTranslations } from "next-intl";
 import Link from "next/link";
 import React, { useState } from "react";
 import { User } from "@/interfaces/User.interface";
+import { useRouter } from "next/navigation";
+import Snack from "@/utils/snack";
 
 type Props = {
   locale: string;
@@ -26,6 +27,7 @@ const SignUp = ({ locale }: Props) => {
   const [isLoading, setIsLoading] = useState(false);
   const t = useTranslations("SignUp");
   const v = useTranslations("Validation");
+  const router = useRouter();
 
   const formik = useFormik({
     initialValues: {
@@ -44,15 +46,11 @@ const SignUp = ({ locale }: Props) => {
     }),
     onSubmit: async (values) => {
       setIsLoading(true);
-      alert(JSON.stringify(values, null, 2));
       await signUp(values);
       formik.resetForm();
       setIsLoading(false);
     },
   });
-
-  console.log('formik');
-  
 
   const signUp = async (data: User) => {
     const res = await fetch("/api/auth/register", {
@@ -62,8 +60,15 @@ const SignUp = ({ locale }: Props) => {
       },
       body: JSON.stringify(data),
     });
-    const result = await res.json();
-    console.log(result);
+
+    if (!res.ok) {
+      Snack.error(res.statusText);
+    }
+
+    if (res.ok) {
+      Snack.success(v("success"));
+      router.push("/login");
+    }
   };
 
   return (
@@ -137,7 +142,7 @@ const SignUp = ({ locale }: Props) => {
               fullWidth
               name="password"
               label={t("password")}
-              type={showPassword ? 'text' : 'password'}
+              type={showPassword ? "text" : "password"}
               id="password"
               autoComplete="new-password"
               onChange={formik.handleChange}

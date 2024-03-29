@@ -1,28 +1,38 @@
 "use client";
-import { LockOutlined } from "@mui/icons-material";
+import { useState } from "react";
+import Link from "next/link";
+import { useRouter } from "next/navigation";
+
+// MUI
 import {
-  Alert,
   Avatar,
   Box,
   Button,
-  Checkbox,
-  FormControlLabel,
   Grid,
+  IconButton,
   TextField,
   Typography,
 } from "@mui/material";
+import { LockOutlined, Visibility, VisibilityOff } from "@mui/icons-material";
+
+// Validation
 import { useFormik } from "formik";
 import * as Yup from "yup";
+import { signIn } from "next-auth/react";
+
+// Translations
 import { useTranslations } from "next-intl";
-import Link from "next/link";
 
 interface Props {
   locale: string;
 }
 
 const Login = (props: Props) => {
+  const [showPassword, setShowPassword] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
   const t = useTranslations("Login");
   const v = useTranslations("Validation");
+  const router = useRouter();
 
   const formik = useFormik({
     initialValues: {
@@ -35,10 +45,23 @@ const Login = (props: Props) => {
         .required(v("password"))
         .min(8, v("min", { min: 8 })),
     }),
-    onSubmit: (values) => {
-      alert(JSON.stringify(values, null, 2));
+    onSubmit: async (values) => {
+      setIsLoading(true);
+      const res = await signIn("credentials", {
+        email: values.email,
+        password: values.password,
+        redirect: false,
+      });
 
+      if (res?.error) {
+        alert(res!.error);
+      } else {
+        // router.push("/");
+        console.log('si entro')
+        console.log(res); 
+      }
       formik.resetForm();
+      setIsLoading(false);
     },
   });
 
@@ -74,7 +97,7 @@ const Login = (props: Props) => {
           autoFocus
           value={formik.values.email}
           onChange={formik.handleChange}
-          error={!(formik.touched.email && formik.errors.email)}
+          error={!!(formik.touched.email && formik.errors.email)}
           helperText={formik.touched.email && formik.errors.email}
         />
         <TextField
@@ -83,19 +106,31 @@ const Login = (props: Props) => {
           fullWidth
           name="password"
           label={t("password")}
-          type="password"
+          type={showPassword ? "text" : "password"}
           id="password"
           autoComplete="current-password"
           value={formik.values.password}
           onChange={formik.handleChange}
-          error={!(formik.touched.password && formik.errors.password)}
+          error={!!(formik.touched.password && formik.errors.password)}
           helperText={formik.touched.password && formik.errors.password}
+          InputProps={{
+            endAdornment: (
+              <IconButton
+                aria-label="toggle password visibility"
+                onClick={() => setShowPassword(!showPassword)}
+                edge="end"
+              >
+                {showPassword ? <VisibilityOff /> : <Visibility />}
+              </IconButton>
+            ),
+          }}
         />
         <Button
           type="submit"
           fullWidth
           variant="contained"
           sx={{ mt: 3, mb: 2 }}
+          disabled={isLoading}
         >
           {t("title")}
         </Button>

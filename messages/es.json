@@ -22,6 +22,7 @@
     "required": "Este campo es requerido",
     "email": "Correo Electrónico no es válido",
     "min": "Este campo debe tener al menos {min} caracteres",
-    "password": "Contraseña no es válida"
+    "password": "Contraseña no es válida",
+    "success": "El usuario ha sido creado con éxito"
   }
 }
