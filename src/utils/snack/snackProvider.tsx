@@ -1,5 +1,5 @@
 "use client";
-import { SnackbarUtilsConfigurator } from "@/utils/snack";
+import { SnackbarUtilsConfigurator } from "@/utils/snack/snack";
 import { SnackbarProvider } from "notistack";
 import React from "react";
 

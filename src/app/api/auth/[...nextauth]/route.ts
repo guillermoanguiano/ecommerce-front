@@ -2,8 +2,12 @@ import NextAuth from "next-auth/next";
 import CredentialsProvider from "next-auth/providers/credentials";
 import db from "@/libs/prisma";
 import bcrypt from "bcrypt";
+import { AuthOptions } from "next-auth";
 
-const options = {
+export const authOptions: AuthOptions = {
+  session: {
+    strategy: "jwt",
+  },
   providers: [
     CredentialsProvider({
       name: "Credentials",
@@ -12,7 +16,6 @@ const options = {
         password: { label: "Password", type: "password" },
       },
       async authorize(credentials, req) {
-        console.log(credentials);
         const user = await db.user.findUnique({
           where: {
             email: credentials?.email,
@@ -27,7 +30,6 @@ const options = {
               statusText: "user not found",
             })
           );
-        console.log(user, credentials);
 
         const isPasswordValid = await bcrypt.compare(
           credentials!.password,
@@ -51,8 +53,16 @@ const options = {
       },
     }),
   ],
+  callbacks: {
+    async jwt({ token, account, profile }) {
+      if (account) {
+        token.id = account.providerAccountId;
+      }
+      return token;
+    },
+  },
 };
 
-const handler = NextAuth(options);
+const handler = NextAuth(authOptions);
 
 export { handler as GET, handler as POST };

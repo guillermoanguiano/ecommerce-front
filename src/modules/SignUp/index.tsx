@@ -16,7 +16,7 @@ import Link from "next/link";
 import React, { useState } from "react";
 import { User } from "@/interfaces/User.interface";
 import { useRouter } from "next/navigation";
-import Snack from "@/utils/snack";
+import Snack from "@/utils/snack/snack";
 
 type Props = {
   locale: string;
@@ -174,7 +174,7 @@ const SignUp = ({ locale }: Props) => {
         </Button>
         <Grid container justifyContent="flex-end">
           <Grid item>
-            <Link href={`/${locale}/login`}>{t("alreadyHaveAnAccount")}</Link>
+            <Link  href={`/${locale}/login`}>{t("alreadyHaveAnAccount")}</Link>
           </Grid>
         </Grid>
       </Box>

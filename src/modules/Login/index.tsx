@@ -23,6 +23,9 @@ import { signIn } from "next-auth/react";
 // Translations
 import { useTranslations } from "next-intl";
 
+// Utils
+import Snack from "@/utils/snack/snack";
+
 interface Props {
   locale: string;
 }
@@ -54,11 +57,10 @@ const Login = (props: Props) => {
       });
 
       if (res?.error) {
-        alert(res!.error);
+        Snack.error("Cambiar a translate");
       } else {
-        // router.push("/");
-        console.log('si entro')
-        console.log(res); 
+        router.push("/");
+        console.log(res!);
       }
       formik.resetForm();
       setIsLoading(false);

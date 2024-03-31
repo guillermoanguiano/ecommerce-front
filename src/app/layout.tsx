@@ -3,7 +3,8 @@ import { AppRouterCacheProvider } from "@mui/material-nextjs/v13-appRouter";
 import { ThemeProvider } from "@mui/material";
 import theme from "@/theme/theme";
 import { NextIntlClientProvider, useMessages } from "next-intl";
-import SnackProvider from "@/providers/snackProvider";
+import SnackProvider from "@/utils/snack/snackProvider";
+import Session from "@/providers/session";
 
 export const metadata: Metadata = {
   title: "Create Next App",
@@ -25,7 +26,9 @@ export default function RootLayout({
         <NextIntlClientProvider locale={locale} messages={messages}>
           <AppRouterCacheProvider>
             <ThemeProvider theme={theme}>
-              <SnackProvider>{children}</SnackProvider>
+              <Session>
+                <SnackProvider>{children}</SnackProvider>
+              </Session>
             </ThemeProvider>
           </AppRouterCacheProvider>
         </NextIntlClientProvider>

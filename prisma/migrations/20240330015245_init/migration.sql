@@ -5,6 +5,7 @@ CREATE TABLE `User` (
     `lastName` VARCHAR(191) NOT NULL,
     `email` VARCHAR(191) NOT NULL,
     `password` VARCHAR(191) NOT NULL,
+    `admin` BOOLEAN NOT NULL DEFAULT false,
 
     UNIQUE INDEX `User_id_key`(`id`),
     UNIQUE INDEX `User_email_key`(`email`),
