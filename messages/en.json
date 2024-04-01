@@ -5,7 +5,8 @@
     "password": "Password",
     "rememberMe": "Remember me",
     "forgotPassword": "Forgot password?",
-    "register": "Register"
+    "register": "Register",
+    "error": "Invalid email or password"
   },
   "SignUp": {
     "title": "Sign Up",

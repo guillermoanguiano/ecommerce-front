@@ -8,6 +8,7 @@ import {
   Avatar,
   Box,
   Button,
+  Container,
   Grid,
   IconButton,
   TextField,
@@ -57,7 +58,7 @@ const Login = (props: Props) => {
       });
 
       if (res?.error) {
-        Snack.error("Cambiar a translate");
+        Snack.error(t("error"));
       } else {
         router.push("/");
         console.log(res!);
@@ -68,84 +69,86 @@ const Login = (props: Props) => {
   });
 
   return (
-    <Box
-      sx={{
-        marginTop: 15,
-        display: "flex",
-        flexDirection: "column",
-        alignItems: "center",
-      }}
-    >
-      <Avatar sx={{ m: 1, bgcolor: "secondary.main" }}>
-        <LockOutlined />
-      </Avatar>
-      <Typography component="h1" variant="h5">
-        {t("title")}
-      </Typography>
+    <Container maxWidth="xs" component={"main"}>
       <Box
-        component="form"
-        onSubmit={formik.handleSubmit}
-        noValidate
-        sx={{ mt: 1, minWidth: "100%" }}
+        sx={{
+          marginTop: 15,
+          display: "flex",
+          flexDirection: "column",
+          alignItems: "center",
+        }}
       >
-        <TextField
-          margin="normal"
-          required
-          fullWidth
-          id="email"
-          label={t("email")}
-          name="email"
-          autoComplete="email"
-          autoFocus
-          value={formik.values.email}
-          onChange={formik.handleChange}
-          error={!!(formik.touched.email && formik.errors.email)}
-          helperText={formik.touched.email && formik.errors.email}
-        />
-        <TextField
-          margin="normal"
-          required
-          fullWidth
-          name="password"
-          label={t("password")}
-          type={showPassword ? "text" : "password"}
-          id="password"
-          autoComplete="current-password"
-          value={formik.values.password}
-          onChange={formik.handleChange}
-          error={!!(formik.touched.password && formik.errors.password)}
-          helperText={formik.touched.password && formik.errors.password}
-          InputProps={{
-            endAdornment: (
-              <IconButton
-                aria-label="toggle password visibility"
-                onClick={() => setShowPassword(!showPassword)}
-                edge="end"
-              >
-                {showPassword ? <VisibilityOff /> : <Visibility />}
-              </IconButton>
-            ),
-          }}
-        />
-        <Button
-          type="submit"
-          fullWidth
-          variant="contained"
-          sx={{ mt: 3, mb: 2 }}
-          disabled={isLoading}
-        >
+        <Avatar sx={{ m: 1, bgcolor: "secondary.main" }}>
+          <LockOutlined />
+        </Avatar>
+        <Typography component="h1" variant="h5">
           {t("title")}
-        </Button>
-        <Grid container>
-          <Grid item xs>
-            <Link href="#">{t("forgotPassword")}</Link>
+        </Typography>
+        <Box
+          component="form"
+          onSubmit={formik.handleSubmit}
+          noValidate
+          sx={{ mt: 1, minWidth: "100%" }}
+        >
+          <TextField
+            margin="normal"
+            required
+            fullWidth
+            id="email"
+            label={t("email")}
+            name="email"
+            autoComplete="email"
+            autoFocus
+            value={formik.values.email}
+            onChange={formik.handleChange}
+            error={!!(formik.touched.email && formik.errors.email)}
+            helperText={formik.touched.email && formik.errors.email}
+          />
+          <TextField
+            margin="normal"
+            required
+            fullWidth
+            name="password"
+            label={t("password")}
+            type={showPassword ? "text" : "password"}
+            id="password"
+            autoComplete="current-password"
+            value={formik.values.password}
+            onChange={formik.handleChange}
+            error={!!(formik.touched.password && formik.errors.password)}
+            helperText={formik.touched.password && formik.errors.password}
+            InputProps={{
+              endAdornment: (
+                <IconButton
+                  aria-label="toggle password visibility"
+                  onClick={() => setShowPassword(!showPassword)}
+                  edge="end"
+                >
+                  {showPassword ? <VisibilityOff /> : <Visibility />}
+                </IconButton>
+              ),
+            }}
+          />
+          <Button
+            type="submit"
+            fullWidth
+            variant="contained"
+            sx={{ mt: 3, mb: 2 }}
+            disabled={isLoading}
+          >
+            {t("title")}
+          </Button>
+          <Grid container>
+            <Grid item xs>
+              <Link href="#">{t("forgotPassword")}</Link>
+            </Grid>
+            <Grid item>
+              <Link href={`/${props.locale}/sign-up`}>{t("register")}</Link>
+            </Grid>
           </Grid>
-          <Grid item>
-            <Link href={`/${props.locale}/sign-up`}>{t("register")}</Link>
-          </Grid>
-        </Grid>
+        </Box>
       </Box>
-    </Box>
+    </Container>
   );
 };
 

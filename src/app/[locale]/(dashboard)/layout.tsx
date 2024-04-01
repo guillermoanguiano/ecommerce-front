@@ -1,10 +1,15 @@
+import Authentication from '@/components/Auth/Authentication'
 import React from 'react'
 
-type Props = {}
+type Props = {
+  children: React.ReactNode;
+}
 
 const AdminLayout = (props: Props) => {
   return (
-    <div>AdminLayout</div>
+    <Authentication>
+      {props.children}
+    </Authentication>
   )
 }
 

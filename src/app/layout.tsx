@@ -22,7 +22,7 @@ export default function RootLayout({
 
   return (
     <html lang={locale}>
-      <body>
+      <body style={{ margin: 0 }}>
         <NextIntlClientProvider locale={locale} messages={messages}>
           <AppRouterCacheProvider>
             <ThemeProvider theme={theme}>

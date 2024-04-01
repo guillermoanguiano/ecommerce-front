@@ -60,6 +60,21 @@ export const authOptions: AuthOptions = {
       }
       return token;
     },
+    async session({ session, token }) {
+      if (!session.user) return session;
+
+      const userSession = await db.user.findUnique({
+        where: {
+          // @ts-ignore
+          id: token.id,
+        },
+      });
+      
+      // @ts-ignore
+      const { password: _, ...user } = userSession;
+      session.user = user;
+      return session;
+    }
   },
 };
 

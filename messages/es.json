@@ -5,7 +5,8 @@
     "password": "Contraseña",
     "forgotPassword": "¿Olvidaste tu contraseña?",
     "rememberMe": "Recuérdame",
-    "register": "Registrarse"
+    "register": "Registrarse",
+    "error": "Correo Electrónico o contraseña incorrectos"
   },
   "SignUp": {
     "title": "Registrarse",
