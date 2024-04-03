@@ -44,9 +44,6 @@ dependencies:
   notistack:
     specifier: ^3.0.1
     version: 3.0.1(csstype@3.1.3)(react-dom@18.2.0)(react@18.2.0)
-  prisma:
-    specifier: ^5.11.0
-    version: 5.11.0
   react:
     specifier: ^18
     version: 18.2.0
@@ -76,6 +73,9 @@ devDependencies:
   eslint-config-next:
     specifier: 14.1.4
     version: 14.1.4(eslint@8.57.0)(typescript@5.4.3)
+  prisma:
+    specifier: ^5.11.0
+    version: 5.11.0
   typescript:
     specifier: ^5
     version: 5.4.3
@@ -767,11 +767,9 @@ packages:
 
   /@prisma/debug@5.11.0:
     resolution: {integrity: sha512-N6yYr3AbQqaiUg+OgjkdPp3KPW1vMTAgtKX6+BiB/qB2i1TjLYCrweKcUjzOoRM5BriA4idrkTej9A9QqTfl3A==}
-    dev: false
 
   /@prisma/engines-version@5.11.0-15.efd2449663b3d73d637ea1fd226bafbcf45b3102:
     resolution: {integrity: sha512-WXCuyoymvrS4zLz4wQagSsc3/nE6CHy8znyiMv8RKazKymOMd5o9FP5RGwGHAtgoxd+aB/BWqxuP/Ckfu7/3MA==}
-    dev: false
 
   /@prisma/engines@5.11.0:
     resolution: {integrity: sha512-gbrpQoBTYWXDRqD+iTYMirDlF9MMlQdxskQXbhARhG6A/uFQjB7DZMYocMQLoiZXO/IskfDOZpPoZE8TBQKtEw==}
@@ -781,7 +779,6 @@ packages:
       '@prisma/engines-version': 5.11.0-15.efd2449663b3d73d637ea1fd226bafbcf45b3102
       '@prisma/fetch-engine': 5.11.0
       '@prisma/get-platform': 5.11.0
-    dev: false
 
   /@prisma/fetch-engine@5.11.0:
     resolution: {integrity: sha512-994viazmHTJ1ymzvWugXod7dZ42T2ROeFuH6zHPcUfp/69+6cl5r9u3NFb6bW8lLdNjwLYEVPeu3hWzxpZeC0w==}
@@ -789,13 +786,11 @@ packages:
       '@prisma/debug': 5.11.0
       '@prisma/engines-version': 5.11.0-15.efd2449663b3d73d637ea1fd226bafbcf45b3102
       '@prisma/get-platform': 5.11.0
-    dev: false
 
   /@prisma/get-platform@5.11.0:
     resolution: {integrity: sha512-rxtHpMLxNTHxqWuGOLzR2QOyQi79rK1u1XYAVLZxDGTLz/A+uoDnjz9veBFlicrpWjwuieM4N6jcnjj/DDoidw==}
     dependencies:
       '@prisma/debug': 5.11.0
-    dev: false
 
   /@rushstack/eslint-patch@1.10.1:
     resolution: {integrity: sha512-S3Kq8e7LqxkA9s7HKLqXGTGck1uwis5vAXan3FnU5yw1Ec5hsSGnq4s/UCaSqABPOnOTg7zASLyst7+ohgWexg==}
@@ -2960,7 +2955,6 @@ packages:
     requiresBuild: true
     dependencies:
       '@prisma/engines': 5.11.0
-    dev: false
 
   /prop-types@15.8.1:
     resolution: {integrity: sha512-oj87CgZICdulUohogVAR7AjlC0327U4el4L6eAvOqCeudMDVU0NThNaV+b9Df4dXgSP1gXMTnPdhfe/2qDH5cg==}

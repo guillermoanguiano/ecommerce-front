@@ -19,10 +19,6 @@ type Props = {
 
 const Navbar = ({ user }: Props) => {
 
-  useEffect(() => {
-    console.log(user)
-  }, [user])
-
   return (
     <Box component="header" sx={{ width: "100%" }}>
       <AppBar position="static" sx={{ backgroundColor: "green" }}>

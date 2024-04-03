@@ -1,5 +1,5 @@
-import { authOptions } from "@/app/api/auth/[...nextauth]/route";
 import Navbar from "@/components/Navbar/Navbar";
+import { authOptions } from "@/utils/options";
 import { getServerSession } from "next-auth";
 
 
