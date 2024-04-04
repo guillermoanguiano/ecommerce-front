@@ -1,8 +1,10 @@
-import React from 'react'
+import MenuDrawer from "@/components/Menu"
 
 const DashboardHome = () => {
   return (
-    <div>page</div>
+    <>
+          <MenuDrawer />
+    </>
   )
 }
 

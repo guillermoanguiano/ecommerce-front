@@ -1,29 +1,37 @@
 {
-  "Login": {
-    "title": "Iniciar Sesión",
-    "email": "Correo Electrónico",
-    "password": "Contraseña",
-    "forgotPassword": "¿Olvidaste tu contraseña?",
-    "rememberMe": "Recuérdame",
-    "register": "Registrarse",
-    "error": "Correo Electrónico o contraseña incorrectos"
-  },
-  "SignUp": {
-    "title": "Registrarse",
-    "firstName": "Nombre Completo",
-    "lastName": "Apellidos",
-    "email": "Correo Electrónico",
-    "password": "Contraseña",
-    "confirmPassword": "Confirmar Contraseña",
-    "register": "Registrarse",
-    "alreadyHaveAnAccount": "¿Ya tienes una cuenta?"
-  },
-  "Validation": {
-    "name": "Nombre es requerido",
-    "required": "Este campo es requerido",
-    "email": "Correo Electrónico no es válido",
-    "min": "Este campo debe tener al menos {min} caracteres",
-    "password": "Contraseña no es válida",
-    "success": "El usuario ha sido creado con éxito"
-  }
+    "Login": {
+        "title": "Iniciar Sesión",
+        "email": "Correo Electrónico",
+        "password": "Contraseña",
+        "forgotPassword": "¿Olvidaste tu contraseña?",
+        "rememberMe": "Recuérdame",
+        "register": "Registrarse",
+        "error": "Correo Electrónico o contraseña incorrectos"
+    },
+    "SignUp": {
+        "title": "Registrarse",
+        "firstName": "Nombre Completo",
+        "lastName": "Apellidos",
+        "email": "Correo Electrónico",
+        "password": "Contraseña",
+        "confirmPassword": "Confirmar Contraseña",
+        "register": "Registrarse",
+        "alreadyHaveAnAccount": "¿Ya tienes una cuenta?"
+    },
+    "Validation": {
+        "name": "Nombre es requerido",
+        "required": "Este campo es requerido",
+        "email": "Correo Electrónico no es válido",
+        "min": "Este campo debe tener al menos {min} caracteres",
+        "password": "Contraseña no es válida",
+        "success": "El usuario ha sido creado con éxito"
+    },
+    "Admin": {
+        "Menu": {
+          "dashboard": "Panel de Control",
+          "products": "Productos",
+          "orders": "Pedidos",
+          "users": "Usuarios"
+        }
+    }
 }

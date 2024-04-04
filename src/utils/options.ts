@@ -1,4 +1,4 @@
-import { AuthOptions } from "next-auth";
+import type { AuthOptions } from "next-auth";
 import db from "@/libs/prisma";
 import bcrypt from "bcrypt";
 import CredentialsProvider from 'next-auth/providers/credentials';
@@ -13,14 +13,11 @@ export const authOptions: AuthOptions = {
           password: { label: "Password", type: "password" },
         },
         async authorize(credentials, req) {
-          console.log('hola')
           const user = await db.user.findUnique({
             where: {
               email: credentials?.email,
             },
           });
-  
-          console.log(user)
   
           if (!user) {
             throw new Error("user not found");

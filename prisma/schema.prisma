@@ -18,17 +18,26 @@ model User {
 }
 
 model Product {
-  id          String @id @default(uuid())
+  id          String   @id @default(uuid())
   name        String
   description String
   image       String
   price       Int
+  category    Category  @relation(fields: [categoryId], references: [id])
+  categoryId  String
   reviews     Review[]
 }
 
+model Category {
+  id          String    @id @default(uuid())
+  name        String
+  description String?
+  products    Product[]
+}
+
 model Review {
-  id        String  @id @default(uuid())
-  product   Product @relation(fields: [productId], references: [id])
+  id        String   @id @default(uuid())
+  product   Product  @relation(fields: [productId], references: [id])
   rating    Int
   text      String
   productId String

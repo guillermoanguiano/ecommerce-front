@@ -5,6 +5,7 @@ import theme from "@/theme/theme";
 import { NextIntlClientProvider, useMessages } from "next-intl";
 import SnackProvider from "@/utils/snack/snackProvider";
 import Session from "@/providers/session";
+import './globals.css'
 
 export const metadata: Metadata = {
   title: "Create Next App",
@@ -22,7 +23,7 @@ export default function RootLayout({
 
   return (
     <html lang={locale}>
-      <body style={{ margin: 0 }}>
+      <body>
         <NextIntlClientProvider locale={locale} messages={messages}>
           <AppRouterCacheProvider>
             <ThemeProvider theme={theme}>

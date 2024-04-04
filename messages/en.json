@@ -1,29 +1,37 @@
 {
-  "Login": {
-    "title": "Sign In",
-    "email": "Email",
-    "password": "Password",
-    "rememberMe": "Remember me",
-    "forgotPassword": "Forgot password?",
-    "register": "Register",
-    "error": "Invalid email or password"
-  },
-  "SignUp": {
-    "title": "Sign Up",
-    "firstName": "First Name",
-    "lastName": "Last Name",
-    "email": "Email",
-    "password": "Password",
-    "confirmPassword": "Confirm Password",
-    "register": "Register",
-    "alreadyHaveAnAccount": "Already have an account?"
-  },
-  "Validation": {
-    "name": "Invalid name",
-    "required": "This field is required",
-    "email": "Invalid email",
-    "min": "Too short it must be {min} characters",
-    "password": "Invalid password",
-    "success": "The user was created successfully"
-  }
+    "Login": {
+        "title": "Sign In",
+        "email": "Email",
+        "password": "Password",
+        "rememberMe": "Remember me",
+        "forgotPassword": "Forgot password?",
+        "register": "Register",
+        "error": "Invalid email or password"
+    },
+    "SignUp": {
+        "title": "Sign Up",
+        "firstName": "First Name",
+        "lastName": "Last Name",
+        "email": "Email",
+        "password": "Password",
+        "confirmPassword": "Confirm Password",
+        "register": "Register",
+        "alreadyHaveAnAccount": "Already have an account?"
+    },
+    "Validation": {
+        "name": "Invalid name",
+        "required": "This field is required",
+        "email": "Invalid email",
+        "min": "Too short it must be {min} characters",
+        "password": "Invalid password",
+        "success": "The user was created successfully"
+    },
+    "Admin": {
+        "Menu": {
+          "dashboard": "Dashboard",
+          "products": "Products",
+          "orders": "Orders",
+          "users": "Users"
+        }
+    }
 }

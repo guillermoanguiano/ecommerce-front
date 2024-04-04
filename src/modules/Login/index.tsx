@@ -61,7 +61,6 @@ const Login = (props: Props) => {
         Snack.error(t("error"));
       } else {
         router.push("/");
-        console.log(res!);
       }
       formik.resetForm();
       setIsLoading(false);

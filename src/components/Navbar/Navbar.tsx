@@ -11,13 +11,21 @@ import * as S from './Navbar.styled';
 import { signOut, useSession } from "next-auth/react";
 import { UserFrontend } from "@/interfaces/User.interface";
 import Link from "next/link";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 
-type Props = {
-  user: any;
-};
+type Props = {};
 
-const Navbar = ({ user }: Props) => {
+const Navbar = (props: Props) => {
+  const { data: session } = useSession();
+  const [user, setUser] = useState<UserFrontend>();
+
+  useEffect(() => {
+    if (session) {
+      setUser(session.user as UserFrontend);
+    } else {
+      setUser(undefined);
+    }
+  }, [session]);
 
   return (
     <Box component="header" sx={{ width: "100%" }}>
