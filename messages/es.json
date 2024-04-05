@@ -33,5 +33,11 @@
           "orders": "Pedidos",
           "users": "Usuarios"
         }
+    },
+    "Metadata": {
+        "Dashboard": {
+            "title": "Panel de Control - MemoShop",
+            "description": "Panel de Control - MemoShop App"
+        }
     }
 }

@@ -28,10 +28,16 @@
     },
     "Admin": {
         "Menu": {
-          "dashboard": "Dashboard",
-          "products": "Products",
-          "orders": "Orders",
-          "users": "Users"
+            "dashboard": "Dashboard",
+            "products": "Products",
+            "orders": "Orders",
+            "users": "Users"
+        }
+    },
+    "Metadata": {
+        "Dashboard": {
+            "title": "Dashboard - MemoShop",
+            "description": "Dashboard - MemoShop App Dashboard Page description"
         }
     }
 }

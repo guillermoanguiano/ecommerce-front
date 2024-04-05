@@ -35,6 +35,7 @@ import { MX, US } from "country-flag-icons/react/3x2";
 import { usePathname } from "next/navigation";
 
 const links = ["dashboard", "products", "orders", "users"];
+const drawerwidth = 240;
 
 type Props = {
     children: React.ReactNode;
@@ -43,11 +44,12 @@ type Props = {
 
 const Menu = ({ children, locale }: Props) => {
     const [open, setOpen] = useState(false);
-    const [country, setCountry] = useState(locale === "es" ? "MX" : "US");
+    const [country, setCountry] = useState(locale);
+    // const path = usePathname().split("/")[3];
+    // console.log(path);
     const text = useTranslations("Admin.Menu");
     const { data: session } = useSession();
     const theme = useTheme();
-    const drawerwidth = 240;
 
     const user = session?.user as UserFrontend;
 
@@ -66,10 +68,12 @@ const Menu = ({ children, locale }: Props) => {
         console.log(link); // TODO: handle link
     };
 
-    const handleCountry = (country: string) => {
+    const handleCountry = (
+        event: React.MouseEvent<HTMLElement>,
+        country: string
+    ) => {
         setCountry(country);
-
-    }
+    };
 
     return (
         <>
@@ -109,7 +113,7 @@ const Menu = ({ children, locale }: Props) => {
                                 color="primary"
                                 value={country}
                                 exclusive
-                                // onChange={(e) => handleCountry(e.target.value)}
+                                onChange={handleCountry}
                                 aria-label="Platform"
                             >
                                 <ToggleButton value="es">
