@@ -8,6 +8,14 @@ const roboto = Roboto({
     display: "swap",
 });
 
+declare module "@mui/material/styles" {
+    interface PaletteOptions {
+        toggled: {
+            main: string;
+        }
+    }
+}
+
 const theme = createTheme({
     typography: {
         fontFamily: roboto.style.fontFamily,
@@ -25,6 +33,9 @@ const theme = createTheme({
             primary: "#000000",
             secondary: "#B1B1B1",
             disabled: "#000000",
+        },
+        toggled: {
+            main: "#000000",
         }
     },
 });

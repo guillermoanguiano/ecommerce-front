@@ -13,7 +13,6 @@ import {
     ToggleButton,
     ToggleButtonGroup,
     Toolbar,
-    Typography,
     useTheme,
 } from "@mui/material";
 import React, { useState } from "react";
@@ -32,24 +31,27 @@ import Image from "next/image";
 import Link from "next/link";
 import { UserFrontend } from "@/interfaces/User.interface";
 import { MX, US } from "country-flag-icons/react/3x2";
-import { usePathname } from "next/navigation";
+import { usePathname, useRouter } from "@/navigation";
+import { useParams } from "next/navigation";
 
-const links = ["dashboard", "products", "orders", "users"];
+// Change this to dynamic link
 const drawerwidth = 240;
+const links = ["dashboard", "products", "orders", "users"];
 
 type Props = {
     children: React.ReactNode;
     locale: string;
 };
 
-const Menu = ({ children, locale }: Props) => {
+const Menu = ({ children, locale: lang }: Props) => {
     const [open, setOpen] = useState(false);
-    const [country, setCountry] = useState(locale);
-    // const path = usePathname().split("/")[3];
-    // console.log(path);
     const text = useTranslations("Admin.Menu");
     const { data: session } = useSession();
     const theme = useTheme();
+
+    const pathname = usePathname();
+    const router = useRouter();
+    const params = useParams();
 
     const user = session?.user as UserFrontend;
 
@@ -65,14 +67,20 @@ const Menu = ({ children, locale }: Props) => {
     };
 
     const handleLink = (link: string) => {
-        console.log(link); // TODO: handle link
+        // @ts-expect-error
+        router.push(`/admin/${link}`);
     };
 
     const handleCountry = (
         event: React.MouseEvent<HTMLElement>,
         country: string
     ) => {
-        setCountry(country);
+        router.replace(
+            // @ts-expect-error
+            { pathname, params },
+            { locale: country }
+        );
+        router.refresh();
     };
 
     return (
@@ -97,9 +105,6 @@ const Menu = ({ children, locale }: Props) => {
                             >
                                 <MenuIcon />
                             </IconButton>
-                            <Typography variant="h6" noWrap component="div">
-                                Overview
-                            </Typography>
                         </Box>
 
                         <Box
@@ -110,17 +115,17 @@ const Menu = ({ children, locale }: Props) => {
                             }}
                         >
                             <ToggleButtonGroup
-                                color="primary"
-                                value={country}
+                                color="standard"
+                                value={lang}
                                 exclusive
                                 onChange={handleCountry}
                                 aria-label="Platform"
                             >
-                                <ToggleButton value="es">
-                                    <MX style={{ width: 20, height: 20 }} />
+                                <ToggleButton value="es" sx={{ padding: 0.5 }}>
+                                    <MX style={{ width: 22, height: 22 }} />
                                 </ToggleButton>
-                                <ToggleButton value="en">
-                                    <US style={{ width: 20, height: 20 }} />
+                                <ToggleButton value="en" sx={{ padding: 0.5 }}>
+                                    <US style={{ width: 22, height: 22 }} />
                                 </ToggleButton>
                             </ToggleButtonGroup>
 
@@ -163,12 +168,25 @@ const Menu = ({ children, locale }: Props) => {
                         </Link>
                     </DrawerHeader>
                     <Divider />
-                    <List sx={{ color: theme.palette.text.secondary }}>
+                    <List
+                        sx={{
+                            color: theme.palette.text.secondary,
+                            paddingTop: 0,
+                        }}
+                    >
                         {list.map((item, index) => (
                             <ListItem
                                 key={index}
                                 disablePadding
-                                sx={{ display: "block" }}
+                                sx={{
+                                    display: "block",
+                                    ...(pathname ===
+                                        `/admin/${links[index]}` && {
+                                        borderLeft: "3.5px solid blue",
+                                        backgroundColor: "rgba(0, 0, 0, 0.04)",
+                                        transition: "0.3s all",
+                                    }),
+                                }}
                             >
                                 <ListItemButton
                                     sx={{

@@ -28,10 +28,10 @@
     },
     "Admin": {
         "Menu": {
-          "dashboard": "Panel de Control",
-          "products": "Productos",
-          "orders": "Pedidos",
-          "users": "Usuarios"
+            "dashboard": "Panel",
+            "products": "Productos",
+            "orders": "Pedidos",
+            "users": "Usuarios"
         }
     },
     "Metadata": {
