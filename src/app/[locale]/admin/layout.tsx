@@ -1,6 +1,6 @@
 import React from "react";
 import Authentication from "@/components/Auth/Authentication";
-import MenuDrawer from "@/components/Menu";
+import MenuDrawer from "@/components/Admin/Menu";
 
 type Props = {
     children: React.ReactNode;
