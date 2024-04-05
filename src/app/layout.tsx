@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import { AppRouterCacheProvider } from "@mui/material-nextjs/v13-appRouter";
-import { ThemeProvider } from "@mui/material";
+import { CssBaseline, ThemeProvider } from "@mui/material";
 import theme from "@/theme/theme";
 import { NextIntlClientProvider, useMessages } from "next-intl";
 import SnackProvider from "@/utils/snack/snackProvider";
@@ -27,6 +27,7 @@ export default function RootLayout({
         <NextIntlClientProvider locale={locale} messages={messages}>
           <AppRouterCacheProvider>
             <ThemeProvider theme={theme}>
+              <CssBaseline /> 
               <Session>
                 <SnackProvider>{children}</SnackProvider>
               </Session>

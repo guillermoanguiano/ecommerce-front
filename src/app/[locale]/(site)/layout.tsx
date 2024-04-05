@@ -1,13 +1,15 @@
 import Navbar from "@/components/Navbar/Navbar";
-import { authOptions } from "@/utils/options";
-import { getServerSession } from "next-auth";
+import { Box } from "@mui/material";
 
 export default async function SiteLayout({children}: {children: React.ReactNode}) {
 
   return (
     <>
       <Navbar />
-      {children}
+      
+      <Box sx={{ backgroundColor: "background.default", minHeight: "100vh" }}>
+        {children}
+      </Box>
     </>
   );
 }      

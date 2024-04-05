@@ -17,6 +17,7 @@
     "@mui/material-nextjs": "5.15.11",
     "@prisma/client": "5.11.0",
     "bcrypt": "5.1.1",
+    "country-flag-icons": "^1.5.11",
     "formik": "2.4.5",
     "next": "14.1.4",
     "next-auth": "4.24.7",
