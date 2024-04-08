@@ -1,0 +1,1 @@
+- Do Admin Products Page then encode the img to send it as base64 to the backend 
