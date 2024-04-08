@@ -79,8 +79,8 @@ const Menu = ({ children, locale: lang }: Props) => {
                                 priority
                                 style={{
                                     objectFit: "cover",
-                                    width: "auto",
-                                    height: "auto",
+                                    width: "10rem",
+                                    height: "5rem",
                                     maxWidth: "100%",
                                 }}
                             />

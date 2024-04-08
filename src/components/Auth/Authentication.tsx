@@ -11,13 +11,8 @@ const Authentication = async (props: Props) => {
 
   if (!session) redirect("/");
 
-  const {
-    user: { admin },
-  }: any = session;
+  if (!session.user.admin) redirect("/");
 
-  if (!admin) redirect("/");
-
-  //? Cambio a client side y lo hago con el hook useSession de next-auth y pongo un toast por si se le niega el acceso o por si entra el admin
 
   return <>{props.children}</>;
 };

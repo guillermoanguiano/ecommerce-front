@@ -1,66 +1,45 @@
 import type { AuthOptions } from "next-auth";
-import db from "@/libs/prisma";
-import bcrypt from "bcrypt";
-import CredentialsProvider from 'next-auth/providers/credentials';
+import CredentialsProvider from "next-auth/providers/credentials";
 
 export const authOptions: AuthOptions = {
-    secret: process.env.NEXTAUTH_SECRET,
     providers: [
-      CredentialsProvider({
-        name: "Credentials",
-        credentials: {
-          email: { label: "Email", type: "text" },
-          password: { label: "Password", type: "password" },
-        },
-        async authorize(credentials, req) {
-          const user = await db.user.findUnique({
-            where: {
-              email: credentials?.email,
+        CredentialsProvider({
+            name: "Credentials",
+            credentials: {
+                email: { label: "Email", type: "text" },
+                password: { label: "Password", type: "password" },
             },
-          });
-  
-          if (!user) {
-            throw new Error("user not found");
-          }
-  
-          const isPasswordValid = await bcrypt.compare(
-            credentials!.password,
-            user.password
-          );
-  
-          if (isPasswordValid) {
-            return {
-              id: user.id,
-              name: user.firstName + " " + user.lastName,
-              email: user.email,
-            }
-          }
-  
-          return null
-        },
-      }),
+            async authorize(credentials, req) {
+                const res = await fetch(
+                    "http://localhost:4000/api/users/auth",
+                    {
+                        method: "POST",
+                        headers: {
+                            "Content-Type": "application/json",
+                        },
+                        body: JSON.stringify({
+                            email: credentials?.email,
+                            password: credentials?.password,
+                        }),
+                    }
+                );
+                const user = await res.json();
+
+                if (user.error || !res.ok || !user) {
+                    return null;
+                }
+
+                return user;
+            },
+        }),
     ],
     callbacks: {
-      async jwt({ token, account, profile }) {
-        if (account) {
-          token.id = account.providerAccountId;
-        }
-        return token;
-      },
-      async session({ session, token }) {
-        if (!session.user) return session;
-  
-        const userSession = await db.user.findUnique({
-          where: {
-            // @ts-ignore
-            id: token.id,
-          },
-        });
-  
-        // @ts-ignore
-        const { password: _, ...user } = userSession;
-        session.user = user;
-        return session;
-      },
+        async jwt({ token, user }) {
+            return { ...token, ...user };
+        },
+        async session({ session, token }) {
+            session.user = token as any;
+            return session;
+        },
     },
-  };
+};

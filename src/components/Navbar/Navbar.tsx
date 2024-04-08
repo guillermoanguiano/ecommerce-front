@@ -9,7 +9,7 @@ import {
 import SearchIcon from "@mui/icons-material/Search";
 import * as S from './Navbar.styled';
 import { signOut, useSession } from "next-auth/react";
-import { UserFrontend } from "@/interfaces/User.interface";
+import { User } from "@/types/User.interface";
 import Link from "next/link";
 import { useEffect, useState } from "react";
 
@@ -17,11 +17,11 @@ type Props = {};
 
 const Navbar = (props: Props) => {
   const { data: session } = useSession();
-  const [user, setUser] = useState<UserFrontend>();
+  const [user, setUser] = useState<User>();
 
   useEffect(() => {
     if (session) {
-      setUser(session.user as UserFrontend);
+      setUser(session.user as User);
     } else {
       setUser(undefined);
     }

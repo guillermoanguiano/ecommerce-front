@@ -15,7 +15,7 @@ import * as Yup from "yup";
 import { useTranslations } from "next-intl";
 import Link from "next/link";
 import React, { useState } from "react";
-import { User } from "@/interfaces/User.interface";
+import { User } from "@/types/User.interface";
 import { useRouter } from "next/navigation";
 import Snack from "@/utils/snack/snack";
 
@@ -54,7 +54,7 @@ const SignUp = ({ locale }: Props) => {
   });
 
   const signUp = async (data: User) => {
-    const res = await fetch("/api/auth/register", {
+    const res = await fetch("http://localhost:4000/api/users", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -62,14 +62,15 @@ const SignUp = ({ locale }: Props) => {
       body: JSON.stringify(data),
     });
 
+    console.log(res)
+
     if (!res.ok) {
       Snack.error(res.statusText);
+      return;
     }
 
-    if (res.ok) {
-      Snack.success(v("success"));
-      router.push("/login");
-    }
+    Snack.success(t("success"));
+    router.push("/login");
   };
 
   return (

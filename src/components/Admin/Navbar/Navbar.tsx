@@ -1,10 +1,9 @@
 "use client";
 import { Menu as MenuIcon, NotificationsOutlined } from "@mui/icons-material";
 import { Avatar, Box, IconButton, ToggleButton, ToggleButtonGroup, Toolbar, useTheme } from "@mui/material";
-import React, { useState } from "react";
+import React from "react";
 import { MX, US } from 'country-flag-icons/react/3x2';
 import { AppBar } from "./Navbar.styled";
-import { UserFrontend } from "@/interfaces/User.interface";
 import { useSession } from "next-auth/react";
 import { useRouter } from "@/navigation";
 import { useParams } from "next/navigation";
@@ -22,7 +21,7 @@ const Navbar = ({ locale: lang, open, setOpen, drawerwidth }: Props) => {
     const params = useParams();
     const theme = useTheme();
 
-    const user = session?.user as UserFrontend;
+    const user = session?.user;
 
     const handleDrawer = () => {
         setOpen((prev) => !prev);

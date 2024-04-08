@@ -1,4 +1,4 @@
-interface UserBase {
+type UserBase = {
   firstName: string;
   lastName: string;
   email: string;
@@ -6,8 +6,5 @@ interface UserBase {
 
 export interface User extends UserBase {
   password: string;
-}
-
-export interface UserFrontend extends UserBase {
-  admin: boolean;
+  admin?: boolean;
 }
