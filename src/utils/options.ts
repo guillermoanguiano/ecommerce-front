@@ -1,3 +1,4 @@
+import { usersApi } from "@/api/admin/users";
 import type { AuthOptions } from "next-auth";
 import CredentialsProvider from "next-auth/providers/credentials";
 
@@ -10,19 +11,11 @@ export const authOptions: AuthOptions = {
                 password: { label: "Password", type: "password" },
             },
             async authorize(credentials, req) {
-                const res = await fetch(
-                    "http://localhost:4000/api/users/auth",
-                    {
-                        method: "POST",
-                        headers: {
-                            "Content-Type": "application/json",
-                        },
-                        body: JSON.stringify({
-                            email: credentials?.email,
-                            password: credentials?.password,
-                        }),
-                    }
+                const res = await usersApi.signIn(
+                    credentials?.email as string,
+                    credentials?.password as string
                 );
+                
                 const user = await res.json();
 
                 if (user.error || !res.ok || !user) {

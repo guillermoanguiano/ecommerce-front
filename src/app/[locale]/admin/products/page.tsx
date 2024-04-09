@@ -1,3 +1,4 @@
+import { productApi } from "@/api/admin/products";
 import Products from "@/modules/Admin/Products/Products";
 import { Metadata } from "next";
 import { getTranslations } from "next-intl/server";
@@ -20,8 +21,7 @@ export async function generateMetadata({
 
 const getCategories = async () => {
     try {
-        const response = await fetch("http://localhost:4000/api/categories");
-        const data = await response.json();
+        const data = await productApi.getCategories();
         return data;
     } catch (error) {
         throw new Error("Something went wrong");

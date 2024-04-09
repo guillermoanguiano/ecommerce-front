@@ -1,9 +1,9 @@
 "use client";
 import ModalProducts from "@/components/Admin/Modals/ModalProducts";
 import ProductTable from "@/components/Admin/Tables/ProductTable";
-import { Box, Button, Grid, Stack, Typography, useTheme } from "@mui/material";
+import { Box, Button, Stack, Typography, useTheme } from "@mui/material";
 import { useTranslations } from "next-intl";
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 
 type Props = {
     categories: [];
@@ -57,7 +57,7 @@ const Products = (props: Props) => {
 
             <ModalProducts
                 open={modal}
-                handleClose={handleClose}
+                handleModalClose={handleClose}
                 categories={props.categories}
             />
         </Box>

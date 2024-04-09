@@ -24,7 +24,8 @@
         "email": "Invalid email",
         "min": "Too short it must be {min} characters",
         "password": "Invalid password",
-        "success": "The user was created successfully"
+        "success": "The user was created successfully",
+        "error": "The user could not be created"
     },
     "Admin": {
         "Menu": {

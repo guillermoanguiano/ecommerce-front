@@ -2,7 +2,11 @@ import { Product } from "@/types/Product.interface";
 
 export const drawerwidth = 240;
 
-const products: Product[] = [
+interface Products extends Product {
+  id: number;
+}
+
+const products: Products[] = [
     {
       id: 1,
       name: "Smartphone",

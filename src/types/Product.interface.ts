@@ -1,12 +1,11 @@
 
 
 interface Product {
-    id: number;
     name: string;
     description: string;
-    price: number;
+    price: number | string;
     image: string;
-    category: 'Electronics' | 'Computers' | 'Accessories'; 
+    category: string; 
     stock: number;
 }
 

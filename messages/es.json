@@ -24,7 +24,8 @@
         "email": "Correo Electrónico no es válido",
         "min": "Este campo debe tener al menos {min} caracteres",
         "password": "Contraseña no es válida",
-        "success": "El usuario ha sido creado con éxito"
+        "success": "El usuario ha sido creado con éxito",
+        "error": "El usuario no pudo ser creado"
     },
     "Admin": {
         "Menu": {
