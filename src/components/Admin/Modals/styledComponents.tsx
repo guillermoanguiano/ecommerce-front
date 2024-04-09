@@ -32,7 +32,7 @@ const TextFieldStyled = styled(TextField)(({ theme }) => ({
 }));
 
 const SelectStyled = styled(Select)(({ theme }) => ({
- 
+ // TODO: ARREGLAR ESTO
     "& .MuiSelect-outlined": {
         borderColor: "#9e3434", 
     },
