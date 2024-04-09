@@ -32,12 +32,61 @@
             "products": "Products",
             "orders": "Orders",
             "users": "Users"
+        },
+        "Dashboard": {
+            
+        },
+        "Products": {
+            "Products": "Products",
+            "AddProduct": "Add Product",
+            "EditProduct": "Edit Product",
+            "Name": "Name",
+            "Description": "Description",
+            "Price": "Price",
+            "Image": "Image",
+            "Category": "Category",
+            "Stock": "Stock"
+        },
+        "Orders": {
+            
+        },
+        "Users": {
+            
+        },
+        "Modals": {
+            "Products": {
+                "AddProduct": "Add Product"
+            }
         }
     },
     "Metadata": {
+        "Login": {
+            "title": "Login - eShop",
+            "description": "Login - eShop App Login Page description"
+        },
+        "SignUp": {
+            "title": "Sign Up - eShop",
+            "description": "Sign Up - eShop App Sign Up Page description"
+        },
+        "Home": {
+            "title": "Home - eShop",
+            "description": "Home - eShop App Home Page description"
+        },
         "Dashboard": {
-            "title": "Dashboard - MemoShop",
-            "description": "Dashboard - MemoShop App Dashboard Page description"
+            "title": "Dashboard - eShop",
+            "description": "Dashboard - eShop App Dashboard Page description"
+        },
+        "Orders": {
+            "title": "Orders - eShop",
+            "description": "Orders - eShop App Orders Page description"
+        },
+        "Products": {
+            "title": "Products - eShop",
+            "description": "Products - eShop App Products Page description"
+        },
+        "Users": {
+            "title": "Users - eShop",
+            "description": "Users - eShop App Users Page description"
         }
     }
 }

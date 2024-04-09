@@ -32,12 +32,61 @@
             "products": "Productos",
             "orders": "Pedidos",
             "users": "Usuarios"
+        },
+        "Dashboard": {
+            
+        },
+        "Products": {
+            "Products": "Listado de Productos",
+            "AddProduct": "Añadir Producto",
+            "EditProduct": "Editar Producto",
+            "Name": "Nombre",
+            "Description": "Descripción",
+            "Price": "Precio",
+            "Image": "Imagen",
+            "Category": "Categoría",
+            "Stock": "Stock"
+        },
+        "Orders": {
+
+        },
+        "Users": {
+            
+        },
+        "Modals": {
+            "Products": {
+                "AddProduct": "Añadir"
+            }
         }
     },
     "Metadata": {
+        "Login": {
+            "title": "Iniciar Sesión - eShop",
+            "description": "Iniciar Sesión - eShop App"
+        },
+        "SignUp": {
+            "title": "Registrarse - eShop",
+            "description": "Registrarse - eShop App"
+        },
+        "Home" : {
+            "title": "Inicio - eShop",
+            "description": "eShop App"
+        },
         "Dashboard": {
-            "title": "Panel de Control - MemoShop",
-            "description": "Panel de Control - MemoShop App"
+            "title": "Panel de Control - eShop",
+            "description": "Panel de Control - eShop App"
+        },
+        "Orders": {
+            "title": "Pedidos - eShop",
+            "description": "Pedidos - eShop App"
+        },
+        "Products": {
+            "title": "Productos - eShop",
+            "description": "Productos - eShop App"
+        },
+        "Users": {
+            "title": "Usuarios - eShop",
+            "description": "Usuarios - eShop App"
         }
     }
 }

@@ -5,20 +5,21 @@ import React from "react";
 import { MX, US } from 'country-flag-icons/react/3x2';
 import { AppBar } from "./Navbar.styled";
 import { useSession } from "next-auth/react";
-import { useRouter } from "@/navigation";
+import { usePathname, useRouter } from "@/navigation";
 import { useParams } from "next/navigation";
+import { drawerwidth } from "@/utils/constants";
 
 type Props = {
     locale: string;
     open: boolean;
     setOpen: React.Dispatch<React.SetStateAction<boolean>>;
-    drawerwidth: number;
 };
 
-const Navbar = ({ locale: lang, open, setOpen, drawerwidth }: Props) => {
+const Navbar = ({ locale: lang, open, setOpen }: Props) => {
     const { data: session } = useSession();
     const router = useRouter();
     const params = useParams();
+    const pathname = usePathname();
     const theme = useTheme();
 
     const user = session?.user;

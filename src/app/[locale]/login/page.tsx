@@ -1,10 +1,23 @@
 import Login from "@/modules/Login";
+import type { Metadata } from "next";
+import { getTranslations } from "next-intl/server";
 
 
-export const metadata = {
- title: 'Login - MemoShop',
- description: 'Login - MemoShop App Login Page',
-};
+export async function generateMetadata({
+  params: { locale },
+}: {
+  params: { locale: string };
+}): Promise<Metadata> {
+  const text = await getTranslations({
+      locale,
+      namespace: "Metadata.Login",
+  });
+
+  return {
+      title: text("title"),
+      description: text("description"),
+  };
+}
 
 type Props = {
   params: {

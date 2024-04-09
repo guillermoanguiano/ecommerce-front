@@ -18,9 +18,9 @@ import Image from "next/image";
 import Link from "next/link";
 import { usePathname, useRouter } from "@/navigation";
 import Navbar from "../Navbar/Navbar";
+import { drawerwidth } from "@/utils/constants";
 
 // Change this to dynamic link
-const drawerwidth = 240;
 const links = ["dashboard", "products", "orders", "users"];
 
 type Props = {
@@ -54,7 +54,6 @@ const Menu = ({ children, locale: lang }: Props) => {
                     locale={lang}
                     open={open}
                     setOpen={setOpen}
-                    drawerwidth={drawerwidth}
                 />
                 <Drawer
                     sx={{
@@ -138,9 +137,12 @@ const Menu = ({ children, locale: lang }: Props) => {
             </Box>
             <Box
                 sx={{
-                    ml: open ? `${drawerwidth}px` : 0,
-                    transition: "0.2s all",
+                    marginLeft: open ? `${drawerwidth}px` : 0,
+                    width: `calc(100% - ${open ? 240 : 0}px)`,
+                    transition: "margin-left 0.2s, width 0.2s",
                     marginTop: "64px",
+                    position: "relative",
+                    overflow: "auto",
                 }}
             >
                 {children}

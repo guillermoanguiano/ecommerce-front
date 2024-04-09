@@ -12,6 +12,10 @@ declare module "@mui/material/styles" {
     interface PaletteOptions {
         toggled: {
             main: string;
+        },
+        AddButton: {
+            main: string;
+            hover: string;
         }
     }
 }
@@ -19,6 +23,10 @@ declare module "@mui/material/styles" {
 const theme = createTheme({
     typography: {
         fontFamily: roboto.style.fontFamily,
+        h1: {
+            fontSize: "1.8rem",
+            fontWeight: "bold",
+        }
     },
     palette: {
         primary: {
@@ -36,6 +44,10 @@ const theme = createTheme({
         },
         toggled: {
             main: "#000000",
+        },
+        AddButton: {
+            main: "#0000FF",
+            hover: "#0000CC",
         }
     },
 });
