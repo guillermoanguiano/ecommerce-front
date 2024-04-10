@@ -1,3 +1,5 @@
 - Do Admin Products Page then encode the img to send it as base64 to the backend ✅
 - Make a ENV in next config to store the api link.
 - Estilar el Select del Modal de Productos
+- Hace traducción de los Snacks de los modales
+- Consumir API y hacer que haga la carga por el servidor con un paginado dinamico en el URL. 

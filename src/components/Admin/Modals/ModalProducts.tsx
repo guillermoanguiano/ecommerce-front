@@ -29,6 +29,7 @@ type Props = {
 
 const ModalProducts = ({ open, handleModalClose, categories }: Props) => {
     const [image, setImage] = useState<any>();
+    const [loading, setLoading] = useState(false);
     const t = useTranslations("Admin.Modals.Products");
 
     const formik = useFormik({
@@ -49,6 +50,7 @@ const ModalProducts = ({ open, handleModalClose, categories }: Props) => {
             image: Yup.string().required("Image is required"),
         }),
         onSubmit: async (values) => {
+            setLoading(true);
             const product = {
                 ...values,
                 image: image as string,
@@ -60,6 +62,7 @@ const ModalProducts = ({ open, handleModalClose, categories }: Props) => {
             formik.resetForm();
             setImage(null);
             handleClose();
+            setLoading(false);
         },
     });
 
@@ -240,6 +243,7 @@ const ModalProducts = ({ open, handleModalClose, categories }: Props) => {
 
                     <S.SaveButton
                         type="submit"
+                        disabled={loading}
                         sx={{
                             alignSelf: { sm: "flex-end" },
                         }}

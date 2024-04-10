@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { Dialog, Typography } from "@mui/material";
 import * as S from "./Modal.styled";
 import { useTranslations } from "next-intl";
@@ -13,6 +13,7 @@ type Props = {
 };
 
 const ModalCategories = ({ open, handleModalClose }: Props) => {
+    const [loading, setLoading] = useState(false);
     const t = useTranslations("Admin.Modals.Products");
 
     const formik = useFormik({
@@ -23,10 +24,12 @@ const ModalCategories = ({ open, handleModalClose }: Props) => {
             category: Yup.string().required("Category is required"),
         }),
         onSubmit: async (values) => {
+            setLoading(true);
             const category = values.category;
             await saveCategory(category);
             formik.resetForm();
             handleClose();
+            setLoading(false);
         },
     });
 
@@ -71,6 +74,7 @@ const ModalCategories = ({ open, handleModalClose }: Props) => {
 
                     <S.SaveButton
                         type="submit"
+                        disabled={loading}
                         sx={{
                             alignSelf: { sm: "flex-end" },
                             marginTop: "1rem",
