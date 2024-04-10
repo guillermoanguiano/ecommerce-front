@@ -1,13 +1,13 @@
 import {
-    Autocomplete,
-    Box,
-    Button,
     Dialog,
-    Typography,
-    useTheme,
+    FormControl,
+    InputLabel,
+    MenuItem,
+    Select,
+    Typography
 } from "@mui/material";
 import { useTranslations } from "next-intl";
-import * as S from "./styledComponents";
+import * as S from "./Modal.styled";
 import { useFormik } from "formik";
 import * as Yup from "yup";
 import { useState } from "react";
@@ -29,7 +29,6 @@ type Props = {
 
 const ModalProducts = ({ open, handleModalClose, categories }: Props) => {
     const [image, setImage] = useState<any>();
-    const theme = useTheme();
     const t = useTranslations("Admin.Modals.Products");
 
     const formik = useFormik({
@@ -39,11 +38,11 @@ const ModalProducts = ({ open, handleModalClose, categories }: Props) => {
             price: "",
             description: "",
             stock: "",
-            image: "",
+            image: "" as any,
         },
         validationSchema: Yup.object().shape({
             name: Yup.string().required("Name is required"),
-            category: Yup.mixed().required("Category is required"),
+            category: Yup.string().required("Category is required"),
             price: Yup.string().required("Price is required"),
             description: Yup.string().required("Description is required"),
             stock: Yup.string().required("Stock is required"),
@@ -76,7 +75,9 @@ const ModalProducts = ({ open, handleModalClose, categories }: Props) => {
                 return;
             } else {
                 setImage(reader.result);
-                formik.setFieldValue("image", target.value);
+                formik.setFieldValue("image", file.name);
+                formik.setFieldTouched("image", true);
+                formik.setFieldError("image", "");
             }
         };
     };
@@ -84,13 +85,13 @@ const ModalProducts = ({ open, handleModalClose, categories }: Props) => {
     const saveProduct = async (values: Product) => {
         try {
             const res = await productApi.addProduct(values);
-        if (res.ok) {
-            Snack.success("Product added successfully");
-            console.log(res);
-        } else {
-            Snack.error("Error adding product");
-            console.log(res);
-        }
+            if (res.ok) {
+                Snack.success("Product added successfully");
+                console.log(res);
+            } else {
+                Snack.error("Error adding product");
+                console.log(res);
+            }
         } catch (error) {
             console.log(error);
             Snack.error("Error adding product");
@@ -110,13 +111,9 @@ const ModalProducts = ({ open, handleModalClose, categories }: Props) => {
                 <S.Form onSubmit={formik.handleSubmit}>
                     <S.Rows>
                         <S.InputText
-                            label="Name"
+                            label={t("Name")}
                             variant="outlined"
                             fullWidth
-                            required
-                            InputLabelProps={{
-                                shrink: true,
-                            }}
                             id="name"
                             name="name"
                             value={formik.values.name}
@@ -128,48 +125,44 @@ const ModalProducts = ({ open, handleModalClose, categories }: Props) => {
                                 formik.touched.name && formik.errors.name
                             }
                         />
-                        <Autocomplete
-                            id="category"
-                            fullWidth
-                            freeSolo
-                            value={formik.values.category}
-                            options={categories.map((category: Category) => ({
-                                value: category.id,
-                                label: category.name,
-                            }))}
-                            isOptionEqualToValue={(option, value) =>
-                                option.value === value.value
-                            }
-                            renderInput={(params) => (
-                                <S.InputText
-                                    {...params}
-                                    InputLabelProps={{
-                                        shrink: true,
-                                    }}
-                                    label="Category"
-                                    error={
-                                        !!(
-                                            formik.touched.category &&
-                                            formik.errors.category
-                                        )
-                                    }
-                                />
-                            )}
-                            onChange={(_, value) => {
-                                formik.setFieldValue("category", value);
-                            }}
-                        />
+                        <FormControl fullWidth>
+                            <InputLabel id="category-label">
+                                {t("Category")}
+                            </InputLabel>
+                            <Select
+                                labelId="category-label"
+                                id="category"
+                                value={formik.values.category}
+                                onChange={(event) => {
+                                    formik.setFieldValue(
+                                        "category",
+                                        event.target.value
+                                    );
+                                }}
+                                error={
+                                    !!(
+                                        formik.touched.category &&
+                                        formik.errors.category
+                                    )
+                                }
+                            >
+                                {categories.map((category: Category) => (
+                                    <MenuItem
+                                        key={category.id}
+                                        value={category.id}
+                                    >
+                                        {category.name}
+                                    </MenuItem>
+                                ))}
+                            </Select>
+                        </FormControl>
                     </S.Rows>
                     <S.Rows>
                         <S.InputText
-                            label="Price"
+                            label={t("Price")}
                             variant="outlined"
                             fullWidth
-                            required
                             type="number"
-                            InputLabelProps={{
-                                shrink: true,
-                            }}
                             id="price"
                             name="price"
                             value={formik.values.price}
@@ -182,13 +175,9 @@ const ModalProducts = ({ open, handleModalClose, categories }: Props) => {
                             }
                         />
                         <S.InputText
-                            label="Stock"
+                            label={t("Stock")}
                             variant="outlined"
                             fullWidth
-                            required
-                            InputLabelProps={{
-                                shrink: true,
-                            }}
                             type="number"
                             id="stock"
                             name="stock"
@@ -203,15 +192,11 @@ const ModalProducts = ({ open, handleModalClose, categories }: Props) => {
                         />
                     </S.Rows>
                     <S.InputText
-                        label="Description"
+                        label={t("Description")}
                         variant="outlined"
                         fullWidth
                         multiline
                         rows={4}
-                        required
-                        InputLabelProps={{
-                            shrink: true,
-                        }}
                         id="description"
                         name="description"
                         value={formik.values.description}
@@ -228,14 +213,30 @@ const ModalProducts = ({ open, handleModalClose, categories }: Props) => {
                         }
                     />
 
-                    <S.Input
-                        type="file"
-                        name="image"
-                        onChange={getFile}
-                        required
-                        multiple
-                        value={formik.values.image}
-                    />
+                    <S.FileButton>
+                        <label htmlFor="image">
+                            <svg
+                                className="w-8 h-8"
+                                fill="currentColor"
+                                xmlns="http://www.w3.org/2000/svg"
+                                viewBox="0 0 20 20"
+                            >
+                                <path d="M16.88 9.1A4 4 0 0 1 16 17H5a5 5 0 0 1-1-9.9V7a3 3 0 0 1 4.52-2.59A4.98 4.98 0 0 1 17 8c0 .38-.04.74-.12 1.1zM11 11h3l-4-4-4 4h3v3h2v-3z" />
+                            </svg>
+                            <span>{formik.values.image || "Select image"}</span>
+                            <S.Input
+                                id="image"
+                                type="file"
+                                name="image"
+                                onChange={getFile}
+                                value={formik.values.image.name}
+                                style={{ display: "none" }}
+                                onError={() =>
+                                    formik.setFieldError("image", "")
+                                }
+                            />
+                        </label>
+                    </S.FileButton>
 
                     <S.SaveButton
                         type="submit"

@@ -1,25 +1,28 @@
 "use client";
-import ModalProducts from "@/components/Admin/Modals/ModalProducts";
-import ProductTable from "@/components/Admin/Tables/ProductTable";
+import React, { useState } from "react";
 import { Box, Button, Stack, Typography, useTheme } from "@mui/material";
 import { useTranslations } from "next-intl";
-import React, { useState } from "react";
+import ModalCategories from "@/components/Admin/Modals/ModalCategories";
+import ModalProducts from "@/components/Admin/Modals/ModalProducts";
+import ProductTable from "@/components/Admin/Tables/ProductTable";
+import * as S from "./Products.styled";
 
 type Props = {
     categories: [];
 };
 
 const Products = (props: Props) => {
-    const [modal, setModal] = useState(false);
+    const [modalProducts, setModalProducts] = useState(false);
+    const [modalCategories, setModalCategories] = useState(false);
     const theme = useTheme();
     const t = useTranslations("Admin.Products");
 
-    const handleClickOpen = () => {
-        setModal(true);
+    const handleModalProducts = () => {
+        setModalProducts(!modalProducts);
     };
 
-    const handleClose = () => {
-        setModal(false);
+    const handleModalCategories = () => {
+        setModalCategories(!modalCategories);
     };
 
     return (
@@ -35,30 +38,40 @@ const Products = (props: Props) => {
                 <Typography variant="h5" fontWeight={"bold"}>
                     {t("Products")}
                 </Typography>
-                <Button
-                    variant="contained"
-                    sx={{
-                        backgroundColor: "#075dd6",
-                        color: theme.palette.primary.main,
-                        transition: "all 0.3s ease",
-                        fontWeight: "bold",
-                        "&:hover": {
-                            backgroundColor: "#126be9",
-                            opacity: 0.9,
-                        },
-                    }}
-                    onClick={handleClickOpen}
-                >
-                    {t("AddProduct")}
-                </Button>
+                <Box sx={{ display: "flex", gap: "1rem" }}>
+                    <S.AddButton
+                        variant="contained"
+                        sx={{
+                            backgroundColor: "#FFF",
+                            color: theme.palette.primary.dark,
+                            "&:hover": {
+                                backgroundColor: "#F1F1F1",
+                            },
+                        }}
+                        onClick={handleModalCategories}
+                    >
+                        {t("AddCategory")}
+                    </S.AddButton>
+                    <S.AddButton
+                        variant="contained"
+                        onClick={handleModalProducts}
+                    >
+                        {t("AddProduct")}
+                    </S.AddButton>
+                </Box>
             </Stack>
 
             <ProductTable />
 
             <ModalProducts
-                open={modal}
-                handleModalClose={handleClose}
+                open={modalProducts}
+                handleModalClose={handleModalProducts}
                 categories={props.categories}
+            />
+
+            <ModalCategories
+                open={modalCategories}
+                handleModalClose={handleModalCategories}
             />
         </Box>
     );

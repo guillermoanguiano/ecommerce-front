@@ -2,23 +2,22 @@
 import {
     Box,
     Divider,
-    Drawer,
     List,
     ListItem,
     ListItemButton,
     ListItemIcon,
     ListItemText,
+    useMediaQuery,
     useTheme,
 } from "@mui/material";
 import React, { useState } from "react";
-import { DrawerHeader } from "./Menu.styled";
+import * as S from "./Menu.styled";
 import { useTranslations } from "next-intl";
 import { AddBusiness, Home, People, ShoppingBag } from "@mui/icons-material";
 import Image from "next/image";
 import Link from "next/link";
 import { usePathname, useRouter } from "@/navigation";
 import Navbar from "../Navbar/Navbar";
-import { drawerwidth } from "@/utils/constants";
 
 // Change this to dynamic link
 const links = ["dashboard", "products", "orders", "users"];
@@ -34,6 +33,7 @@ const Menu = ({ children, locale: lang }: Props) => {
     const theme = useTheme();
     const pathname = usePathname();
     const router = useRouter();
+    const isDesktop = useMediaQuery("(min-width:1024px)");
 
     const list = [
         { text: text("dashboard"), icon: <Home /> },
@@ -50,25 +50,14 @@ const Menu = ({ children, locale: lang }: Props) => {
     return (
         <>
             <Box>
-                <Navbar
-                    locale={lang}
-                    open={open}
-                    setOpen={setOpen}
-                />
-                <Drawer
-                    sx={{
-                        width: drawerwidth,
-                        flexShrink: 0,
-                        "& .MuiDrawer-paper": {
-                            width: drawerwidth,
-                            boxSizing: "border-box",
-                        },
-                    }}
-                    variant="persistent"
+                <Navbar locale={lang} open={open} setOpen={setOpen} />
+                <S.Drawer
+                    variant={isDesktop ? "persistent" : "temporary"}
                     anchor="left"
                     open={open}
+                    onClose={() => setOpen(false)}
                 >
-                    <DrawerHeader sx={{ textAlign: "center" }}>
+                    <S.DrawerHeader sx={{ textAlign: "center" }}>
                         <Link href="/admin/dashboard">
                             <Image
                                 src="/logo.png"
@@ -79,12 +68,12 @@ const Menu = ({ children, locale: lang }: Props) => {
                                 style={{
                                     objectFit: "cover",
                                     width: "10rem",
-                                    height: "5rem",
+                                    height: "3rem",
                                     maxWidth: "100%",
                                 }}
                             />
                         </Link>
-                    </DrawerHeader>
+                    </S.DrawerHeader>
                     <Divider />
                     <List
                         sx={{
@@ -133,20 +122,14 @@ const Menu = ({ children, locale: lang }: Props) => {
                             </ListItem>
                         ))}
                     </List>
-                </Drawer>
+                </S.Drawer>
             </Box>
-            <Box
-                sx={{
-                    marginLeft: open ? `${drawerwidth}px` : 0,
-                    width: `calc(100% - ${open ? 240 : 0}px)`,
-                    transition: "margin-left 0.2s, width 0.2s",
-                    marginTop: "64px",
-                    position: "relative",
-                    overflow: "auto",
-                }}
-            >
+            <S.Container
+                open={open}
+                desktop={isDesktop ? 1 : 0}
+            >   
                 {children}
-            </Box>
+            </S.Container>
         </>
     );
 };

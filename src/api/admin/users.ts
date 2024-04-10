@@ -4,7 +4,7 @@ import { User } from "@/types/User.interface";
 export const usersApi = {
     getUsers: async () => {},
     signUp: async (values: User) => {
-        const res = await fetch(process.env.API_URL + "/users" , {
+        const res = await fetch("http://localhost:4000/api/users" , {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",
@@ -15,7 +15,7 @@ export const usersApi = {
     },
     signIn: async (email: string, password: string) => {
         const res = await fetch(
-            process.env.API_URL + "/users/auth",
+            "http://localhost:4000/api/users/auth",
             {
                 method: "POST",
                 headers: {

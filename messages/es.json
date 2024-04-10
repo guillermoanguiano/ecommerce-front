@@ -46,7 +46,8 @@
             "Price": "Precio",
             "Image": "Imagen",
             "Category": "Categoría",
-            "Stock": "Stock"
+            "Stock": "Stock",
+            "AddCategory": "Añadir Categoría"
         },
         "Orders": {
 
@@ -56,7 +57,15 @@
         },
         "Modals": {
             "Products": {
-                "AddProduct": "Añadir"
+                "AddProduct": "Añadir Producto",
+                "EditProduct": "Editar Producto",
+                "AddCategory": "Añadir Categoría",
+                "EditCategory": "Editar Categoría",
+                "Name": "Nombre",
+                "Description": "Descripción",
+                "Category": "Categoría",
+                "Price": "Precio",
+                "Stock": "Stock"
             }
         }
     },

@@ -14,20 +14,20 @@ const Rows = styled(Box)(({ theme }) => ({
 
 const InputText = styled(TextField)(({ theme }) => ({
     "& .MuiInputLabel-root": {
-        color: "#b8b6b6",
+        color: "#495057",
     },
     "& .MuiInputLabel-root.Mui-focused": {
-        color: "#b8b6b6",
+        color: "#495057",
     },
     "& .MuiOutlinedInput-root": {
         "& fieldset": {
-            borderColor: "#E1E1E1",
+            borderColor: "#ced4da;",
         },
         "&:hover fieldset": {
-            borderColor: "#E1E1E1",
+            borderColor: "#ced4da;",
         },
         "&.Mui-focused fieldset": {
-            borderColor: "#E1E1E1",
+            borderColor: "#ced4da;",
         },
     },
     "& .MuiInputBase-input[type=number]": {
@@ -40,7 +40,7 @@ const SaveButton = styled(Button)(({ theme }) => ({
     color: theme.palette.primary.main,
     transition: "all 0.3s ease",
     fontWeight: "bold",
-    paddingX: "1.5rem",
+    padding: "0.25rem 1.25rem",
     "&:hover": {
         backgroundColor: "#126be9",
         opacity: 0.9,
@@ -84,4 +84,47 @@ const ModalContainer = styled(Box)(({ theme }) => ({
     gap: "2.5rem",
 }));
 
-export { Form, Rows, InputText, Input, SaveButton, ModalContainer };
+const FileButton = style.div`
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 16rem;
+    background-color: #f3f4f6;
+    border-radius: 0.75rem;
+    margin: 1rem auto;
+
+    label {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        width: 16rem;
+        padding: 1.5rem 1rem;
+        background-color: white;
+        color: #3490dc;
+        border-radius: 0.75rem;
+        box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+        letter-spacing: 0.05em;
+        text-transform: uppercase;
+        border-width: 1px;
+        border-color: #3490dc;
+        cursor: pointer;
+    }
+
+    label svg {
+        width: 2rem;
+        height: 2rem;
+    }
+
+    label span {
+        margin-top: 0.5rem;
+        font-size: 0.875rem;
+        line-height: 1.25rem;
+    }
+
+    label:hover {
+        background-color: #3490dc;
+        color: #fff;
+    }
+`;
+
+export { Form, Rows, InputText, Input, SaveButton, ModalContainer, FileButton };

@@ -46,7 +46,8 @@
             "Price": "Price",
             "Image": "Image",
             "Category": "Category",
-            "Stock": "Stock"
+            "Stock": "Stock",
+            "AddCategory": "Add Category"
         },
         "Orders": {
             
@@ -56,7 +57,15 @@
         },
         "Modals": {
             "Products": {
-                "AddProduct": "Add Product"
+                "AddProduct": "Add Product",
+                "EditProduct": "Edit Product",
+                "AddCategory": "Add Category",
+                "EditCategory": "Edit Category",
+                "Name": "Name",
+                "Description": "Description",
+                "Category": "Category",
+                "Price": "Price",
+                "Stock": "Stock"
             }
         }
     },
