@@ -1,6 +1,18 @@
 
 
-interface Product {
+interface IProduct {
+    id?: number;
+    name: string;
+    description: string;
+    price: number | string;
+    imageUrl: string;
+    image?: string;
+    category: string; 
+    stock: number;
+}
+
+interface IProductAPI {
+    id?: number;
     name: string;
     description: string;
     price: number | string;
@@ -9,9 +21,14 @@ interface Product {
     stock: number;
 }
 
-interface ProductCategory {
+interface IProductCategory {
     id: number;
     name: string;
 }
 
-export type { Product, ProductCategory };
+interface IProductResponse {
+    total: number;
+    list: IProduct[];
+}
+
+export type { IProduct, IProductCategory, IProductResponse, IProductAPI };

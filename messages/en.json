@@ -40,7 +40,8 @@
         "Products": {
             "Products": "Products",
             "AddProduct": "Add Product",
-            "EditProduct": "Edit Product",
+            "EditProduct": "Edit",
+            "DeleteProduct": "Delete",
             "Name": "Name",
             "Description": "Description",
             "Price": "Price",
@@ -65,7 +66,14 @@
                 "Description": "Description",
                 "Category": "Category",
                 "Price": "Price",
-                "Stock": "Stock"
+                "Stock": "Stock",
+                "ImageTooLarge": "Error uploading image",
+                "ProductAdded": "Product added successfully",
+                "ErrorAddingProduct": "Error adding product"
+            },
+            "Categorys": {
+                "CategoryAdded": "Category added successfully",
+                "ErrorAddingCategory": "Error adding category"
             }
         }
     },

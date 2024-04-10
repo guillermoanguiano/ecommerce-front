@@ -1,18 +1,18 @@
-import { Product } from "@/types/Product.interface";
+import { IProduct } from "@/types/Product.interface";
 
 export const drawerwidth = 240;
 
-interface Products extends Product {
+interface IProducts extends IProduct {
   id: number;
 }
 
-const products: Products[] = [
+const products: IProducts[] = [
     {
       id: 1,
       name: "Smartphone",
       description: "A powerful smartphone with great features",
       price: 599.99,
-      image: "smartphone.jpg",
+      imageUrl: "smartphone.jpg",
       category: 'Electronics',
       stock: 100,
     },
@@ -21,7 +21,7 @@ const products: Products[] = [
       name: "Laptop",
       description: "A high-performance laptop for all your needs",
       price: 1299.99,
-      image: "laptop.jpg",
+      imageUrl: "laptop.jpg",
       category: 'Computers',
       stock: 50,
     },
@@ -30,7 +30,7 @@ const products: Products[] = [
       name: "Headphones",
       description: "High-quality headphones for immersive audio experience",
       price: 149.99,
-      image: "headphones.jpg",
+      imageUrl: "headphones.jpg",
       category: 'Accessories',
       stock: 75,
     },

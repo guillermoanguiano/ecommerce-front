@@ -1,8 +1,9 @@
-import { Product } from "@/types/Product.interface";
+import { IProductAPI } from "@/types/Product.interface";
 
 export const productApi = {
-    addProduct: async (values: Product) => {
+    addProduct: async (values: IProductAPI) => {
         const res = await fetch("http://localhost:4000/api/products", {
+            cache: "no-store",
             method: "POST",
             headers: {
                 "Content-Type": "application/json",
@@ -11,7 +12,7 @@ export const productApi = {
         });
         return res;
     },
-    getProducts: async (page: string | number, limit: string | number) => {
+    getProducts: async (page: string = "1", limit: string = "10") => {
         const res = await fetch(
             `http://localhost:4000/api/products?page=${page}&limit=${limit}`
         );
@@ -29,7 +30,7 @@ export const productApi = {
             headers: {
                 "Content-Type": "application/json",
             },
-            body: JSON.stringify({name}),
+            body: JSON.stringify({ name }),
         });
         return res;
     },

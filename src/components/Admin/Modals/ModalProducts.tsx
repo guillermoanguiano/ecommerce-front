@@ -11,10 +11,11 @@ import * as S from "./Modal.styled";
 import { useFormik } from "formik";
 import * as Yup from "yup";
 import { useState } from "react";
-import { Product } from "@/types/Product.interface";
+import { IProductAPI } from "@/types/Product.interface";
 import Snack from "@/utils/snack/snack";
 import { getSizeOnMb } from "@/utils";
 import { productApi } from "@/api/admin/products";
+import { useRouter } from "next/navigation";
 
 interface Category {
     id: number;
@@ -31,6 +32,7 @@ const ModalProducts = ({ open, handleModalClose, categories }: Props) => {
     const [image, setImage] = useState<any>();
     const [loading, setLoading] = useState(false);
     const t = useTranslations("Admin.Modals.Products");
+    const router = useRouter();
 
     const formik = useFormik({
         initialValues: {
@@ -54,15 +56,16 @@ const ModalProducts = ({ open, handleModalClose, categories }: Props) => {
             const product = {
                 ...values,
                 image: image as string,
-                category: values.category.label,
+                category: values.category,
                 stock: Number(values.stock),
             };
-            console.log(product);
+            console.log(values);
             await saveProduct(product);
             formik.resetForm();
             setImage(null);
             handleClose();
             setLoading(false);
+            router.refresh();
         },
     });
 
@@ -73,8 +76,8 @@ const ModalProducts = ({ open, handleModalClose, categories }: Props) => {
         reader.readAsDataURL(file);
         reader.onloadend = () => {
             const sizeMB = getSizeOnMb(reader.result as string);
-            if (sizeMB > 1.5) {
-                Snack.error("Image size should be less than 1.5MB");
+            if (sizeMB > 5) {
+                Snack.error(t("ImageTooLarge"));
                 return;
             } else {
                 setImage(reader.result);
@@ -85,19 +88,19 @@ const ModalProducts = ({ open, handleModalClose, categories }: Props) => {
         };
     };
 
-    const saveProduct = async (values: Product) => {
+    const saveProduct = async (values: IProductAPI) => {
         try {
             const res = await productApi.addProduct(values);
             if (res.ok) {
-                Snack.success("Product added successfully");
+                Snack.success(t("ProductAdded"));
                 console.log(res);
             } else {
-                Snack.error("Error adding product");
+                Snack.error(t("ErrorAddingProduct"));
                 console.log(res);
             }
         } catch (error) {
             console.log(error);
-            Snack.error("Error adding product");
+            Snack.error(t("ErrorAddingProduct"));
         }
     };
 
@@ -152,7 +155,7 @@ const ModalProducts = ({ open, handleModalClose, categories }: Props) => {
                                 {categories.map((category: Category) => (
                                     <MenuItem
                                         key={category.id}
-                                        value={category.id}
+                                        value={category.name}
                                     >
                                         {category.name}
                                     </MenuItem>

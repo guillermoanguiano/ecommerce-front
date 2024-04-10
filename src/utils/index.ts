@@ -4,4 +4,11 @@ const getSizeOnMb = (file: string) => {
     return onMb;
 };
 
-export { getSizeOnMb };
+const convertToMoney = (value: number) => {
+    return new Intl.NumberFormat("es-MX", {
+        style: "currency",
+        currency: "MXN",
+    }).format(Number(value));
+};
+
+export { getSizeOnMb, convertToMoney };

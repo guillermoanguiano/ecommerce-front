@@ -6,9 +6,11 @@ import ModalCategories from "@/components/Admin/Modals/ModalCategories";
 import ModalProducts from "@/components/Admin/Modals/ModalProducts";
 import ProductTable from "@/components/Admin/Tables/ProductTable";
 import * as S from "./Products.styled";
+import { IProductCategory, IProductResponse } from "@/types/Product.interface";
 
 type Props = {
-    categories: [];
+    categories: IProductCategory[];
+    products: IProductResponse;
 };
 
 const Products = (props: Props) => {
@@ -61,7 +63,7 @@ const Products = (props: Props) => {
                 </Box>
             </Stack>
 
-            <ProductTable />
+            <ProductTable products={props.products} />
 
             <ModalProducts
                 open={modalProducts}

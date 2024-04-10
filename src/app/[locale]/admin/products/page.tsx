@@ -28,10 +28,15 @@ const getCategories = async () => {
     }
 };
 
-// TODO: Consumir api para traer productos
-
-export default async function ProductsPage() {
+export default async function ProductsPage({
+    searchParams,
+}: {
+    searchParams?: { [key: string]: string | undefined };
+}) {
     const categories = await getCategories();
+    const { page, limit } = searchParams!;
+    const products = await productApi.getProducts(page, limit);
+    // console.log(products, categories);
 
-    return <Products categories={categories} />;
+    return <Products categories={categories} products={products} />;
 }

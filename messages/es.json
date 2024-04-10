@@ -34,13 +34,12 @@
             "orders": "Pedidos",
             "users": "Usuarios"
         },
-        "Dashboard": {
-            
-        },
+        "Dashboard": {},
         "Products": {
             "Products": "Listado de Productos",
             "AddProduct": "Añadir Producto",
-            "EditProduct": "Editar Producto",
+            "EditProduct": "Editar",
+            "DeleteProduct": "Eliminar",
             "Name": "Nombre",
             "Description": "Descripción",
             "Price": "Precio",
@@ -49,12 +48,8 @@
             "Stock": "Stock",
             "AddCategory": "Añadir Categoría"
         },
-        "Orders": {
-
-        },
-        "Users": {
-            
-        },
+        "Orders": {},
+        "Users": {},
         "Modals": {
             "Products": {
                 "AddProduct": "Añadir Producto",
@@ -65,7 +60,14 @@
                 "Description": "Descripción",
                 "Category": "Categoría",
                 "Price": "Precio",
-                "Stock": "Stock"
+                "Stock": "Stock",
+                "ImageTooLarge": "Error al subir la imagen",
+                "ProductAdded": "Producto añadido con éxito",
+                "ErrorAddingProduct": "Error al añadir el producto"
+            },
+            "Categorys": {
+                "CategoryAdded": "Categoría añadida con éxito",
+                "ErrorAddingCategory": "Error al añadir la categoría"
             }
         }
     },
@@ -78,7 +80,7 @@
             "title": "Registrarse - eShop",
             "description": "Registrarse - eShop App"
         },
-        "Home" : {
+        "Home": {
             "title": "Inicio - eShop",
             "description": "eShop App"
         },

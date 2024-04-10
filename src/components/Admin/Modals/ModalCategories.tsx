@@ -37,10 +37,10 @@ const ModalCategories = ({ open, handleModalClose }: Props) => {
         try {
             const res = await productApi.addCategory(values);
             if (res.ok) {
-                Snack.success("Category added successfully");
+                Snack.success(t("CategoryAdded"));
                 console.log(res);
             } else {
-                Snack.error("Error adding category");
+                Snack.error(t("ErrorAddingCategory"));
                 console.log(res);
             }
         } catch (error) {
