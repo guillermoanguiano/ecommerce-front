@@ -46,7 +46,9 @@
             "Image": "Imagen",
             "Category": "Categoría",
             "Stock": "Stock",
-            "AddCategory": "Añadir Categoría"
+            "AddCategory": "Añadir Categoría",
+            "ProductDeleted": "El producto ha sido eliminado con éxito",
+            "ErrorDeletingProduct": "Error al eliminar el producto"
         },
         "Orders": {},
         "Users": {},

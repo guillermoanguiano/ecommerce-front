@@ -1,11 +1,14 @@
 import { IProductResponse } from "@/types/Product.interface";
 import {
+    Box,
     Button,
     Card,
     CardActions,
     CardContent,
     CardMedia,
+    Divider,
     Grid,
+    Pagination,
     Typography,
 } from "@mui/material";
 import Image from "next/image";
@@ -13,14 +16,38 @@ import React from "react";
 import * as S from "./ProductTable.styled";
 import { convertToMoney } from "@/utils";
 import { useTranslations } from "next-intl";
+import { useRouter, useSearchParams } from "next/navigation";
+import { productApi } from "@/api/admin/products";
+import Snack from "@/utils/snack/snack";
 
 type Props = {
     products: IProductResponse;
 };
 
 const ProductTable = ({ products }: Props) => {
+    const router = useRouter();
     const t = useTranslations("Admin.Products");
+    const { get } = useSearchParams();
     const { list, total } = products;
+    const limit = Number(get("limit")) || 10;
+
+    const handleDelete = async (id: number | undefined) => {
+        if (!id) return;
+        try {
+            const deleteProduct = await productApi.deleteProduct(id);
+            if (deleteProduct) {
+                Snack.success(t("ProductDeleted"));
+                router.push(`?page=1&limit=${limit}`);
+            }
+        } catch (error) {
+            Snack.error(t("ErrorDeletingProduct"));
+        }
+
+    }
+
+    const handleChangePage = (event: React.ChangeEvent<unknown>, value: number) => {
+        router.push(`?page=${value}&limit=${limit}`);
+    }
 
     return (
         <S.ContainerTable >
@@ -38,10 +65,12 @@ const ProductTable = ({ products }: Props) => {
                                         src={product.imageUrl}
                                         alt={product.name}
                                         height={150}
-                                        width={250}
+                                        width={350}
+                                        priority
                                         style={{
                                             objectFit: "cover",
-                                            width: "100%",
+                                            width: "15rem",
+                                            maxHeight: "100%", 
                                             height: "14rem",
                                         }}
                                     />
@@ -83,7 +112,7 @@ const ProductTable = ({ products }: Props) => {
                                     color="error"
                                     variant="outlined"
                                     size="small"
-                                    onClick={() => console.log("delete")}
+                                    onClick={() => handleDelete(product.id)}
                                     startIcon={
                                         <S.DeleteIcon />
                                     }
@@ -95,6 +124,18 @@ const ProductTable = ({ products }: Props) => {
                     </Grid>
                 ))}
             </Grid>
+
+            <Box mt={2}>
+                <Divider sx={{ mb: 2 }} />
+
+                <Pagination
+                    count={Math.ceil(total / limit)}
+                    variant="outlined"
+                    shape="rounded"
+                    onChange={handleChangePage}
+                />
+            </Box>
+
         </S.ContainerTable>
     );
 };

@@ -21,7 +21,11 @@ const ContainerTable = styled(Box)(({ theme }) => ({
     boxShadow: "rgba(0, 0, 0, 0.24) 0.5px 3px 3px",
     marginLeft: "2.5rem",
     marginRight: "2.5rem",
-    height: "100vh",
+    height: "45rem",
+    maxHeight: "100%",
+    display: "flex",
+    flexDirection: "column",
+    justifyContent: "space-between",
 }));
 
 const CardBox = styled(Box)(({ theme }) => ({

@@ -19,6 +19,12 @@ export const productApi = {
         const data = await res.json();
         return data;
     },
+    deleteProduct: async (id: number) => {
+        const res = await fetch(`http://localhost:4000/api/products/${id}`, {
+            method: "DELETE",
+        });
+        return res;
+    },
     getCategories: async () => {
         const res = await fetch("http://localhost:4000/api/categories");
         const data = await res.json();

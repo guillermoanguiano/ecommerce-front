@@ -48,7 +48,9 @@
             "Image": "Image",
             "Category": "Category",
             "Stock": "Stock",
-            "AddCategory": "Add Category"
+            "AddCategory": "Add Category",
+            "ProductDeleted": "Product deleted successfully",
+            "ErrorDeletingProduct": "Error deleting product"
         },
         "Orders": {
             
