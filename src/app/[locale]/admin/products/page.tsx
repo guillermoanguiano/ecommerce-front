@@ -28,6 +28,8 @@ const getCategories = async () => {
     }
 };
 
+// TODO: Consumir api para traer productos
+
 export default async function ProductsPage() {
     const categories = await getCategories();
 

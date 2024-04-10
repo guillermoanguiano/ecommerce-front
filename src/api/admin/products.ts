@@ -11,6 +11,13 @@ export const productApi = {
         });
         return res;
     },
+    getProducts: async (page: string | number, limit: string | number) => {
+        const res = await fetch(
+            `http://localhost:4000/api/products?page=${page}&limit=${limit}`
+        );
+        const data = await res.json();
+        return data;
+    },
     getCategories: async () => {
         const res = await fetch("http://localhost:4000/api/categories");
         const data = await res.json();

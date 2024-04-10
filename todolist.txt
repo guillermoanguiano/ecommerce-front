@@ -3,3 +3,4 @@
 - Estilar el Select del Modal de Productos
 - Hace traducción de los Snacks de los modales
 - Consumir API y hacer que haga la carga por el servidor con un paginado dinamico en el URL. 
+- Checar TODOS 
