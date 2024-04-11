@@ -56,20 +56,23 @@
             "Products": {
                 "AddProduct": "Añadir Producto",
                 "EditProduct": "Editar Producto",
-                "AddCategory": "Añadir Categoría",
-                "EditCategory": "Editar Categoría",
                 "Name": "Nombre",
                 "Description": "Descripción",
-                "Category": "Categoría",
                 "Price": "Precio",
                 "Stock": "Stock",
                 "ImageTooLarge": "Error al subir la imagen",
                 "ProductAdded": "Producto añadido con éxito",
-                "ErrorAddingProduct": "Error al añadir el producto"
+                "ErrorAddingProduct": "Error al añadir el producto",
+                "Required": "Este campo es requerido",
+                "Category": "Categoría"
             },
-            "Categorys": {
+            "Categories": {
                 "CategoryAdded": "Categoría añadida con éxito",
-                "ErrorAddingCategory": "Error al añadir la categoría"
+                "ErrorAddingCategory": "Error al añadir la categoría",
+                "AddCategory": "Añadir Categoría",
+                "EditCategory": "Editar Categoría",
+                "Required": "Este campo es requerido",
+                "Category": "Categoría"
             }
         }
     },

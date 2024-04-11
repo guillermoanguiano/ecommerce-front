@@ -62,11 +62,8 @@
             "Products": {
                 "AddProduct": "Add Product",
                 "EditProduct": "Edit Product",
-                "AddCategory": "Add Category",
-                "EditCategory": "Edit Category",
                 "Name": "Name",
                 "Description": "Description",
-                "Category": "Category",
                 "Price": "Price",
                 "Stock": "Stock",
                 "ImageTooLarge": "Error uploading image",
@@ -75,7 +72,11 @@
             },
             "Categorys": {
                 "CategoryAdded": "Category added successfully",
-                "ErrorAddingCategory": "Error adding category"
+                "ErrorAddingCategory": "Error adding category",
+                "AddCategory": "Add Category",
+                "EditCategory": "Edit Category",
+                "Required": "This field is required",
+                "Category": "Category"
             }
         }
     },

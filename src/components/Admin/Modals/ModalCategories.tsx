@@ -14,14 +14,14 @@ type Props = {
 
 const ModalCategories = ({ open, handleModalClose }: Props) => {
     const [loading, setLoading] = useState(false);
-    const t = useTranslations("Admin.Modals.Products");
+    const t = useTranslations("Admin.Modals.Categories");
 
     const formik = useFormik({
         initialValues: {
             category: "",
         },
         validationSchema: Yup.object().shape({
-            category: Yup.string().required("Category is required"),
+            category: Yup.string().required(t("Required")),
         }),
         onSubmit: async (values) => {
             setLoading(true);
