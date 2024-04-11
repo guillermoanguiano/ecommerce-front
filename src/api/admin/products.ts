@@ -14,7 +14,8 @@ export const productApi = {
     },
     getProducts: async (page: string = "1", limit: string = "10") => {
         const res = await fetch(
-            `http://localhost:4000/api/products?page=${page}&limit=${limit}`
+            `http://localhost:4000/api/products?page=${page}&limit=${limit}`,
+            { cache: "no-store" }
         );
         const data = await res.json();
         return data;
@@ -26,7 +27,7 @@ export const productApi = {
         return res;
     },
     getCategories: async () => {
-        const res = await fetch("http://localhost:4000/api/categories");
+        const res = await fetch("http://localhost:4000/api/categories",{ cache: "no-store" });
         const data = await res.json();
         return data;
     },
