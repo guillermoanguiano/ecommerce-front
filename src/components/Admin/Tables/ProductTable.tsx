@@ -58,7 +58,7 @@ const ProductTable = ({ products }: Props) => {
             >
                 {list.map((product) => (
                     <Grid item xs="auto" sm="auto" md="auto" key={product.id}>
-                        <Card sx={{ maxWidth: "14rem" }}>
+                        <Card sx={{ maxWidth: "15rem" }}>
                             <CardMedia>
                                 <S.CardBox>
                                     <Image
@@ -69,7 +69,7 @@ const ProductTable = ({ products }: Props) => {
                                         priority
                                         style={{
                                             objectFit: "cover",
-                                            width: "15rem",
+                                            width: "14rem",
                                             maxHeight: "100%", 
                                             height: "14rem",
                                         }}
