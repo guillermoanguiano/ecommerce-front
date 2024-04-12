@@ -36,6 +36,7 @@
         "Menu": {
             "dashboard": "Panel",
             "products": "Productos",
+            "categories": "Categorías",
             "orders": "Pedidos",
             "users": "Usuarios"
         },
@@ -54,6 +55,12 @@
             "AddCategory": "Añadir Categoría",
             "ProductDeleted": "El producto ha sido eliminado con éxito",
             "ErrorDeletingProduct": "Error al eliminar el producto"
+        },
+        "Categories": {
+            "Categories": "Listado de Categorías",
+            "AddCategory": "Añadir Categoría",
+            "EditCategory": "Editar Categoría",
+            "Required": "Este campo es requerido"
         },
         "Orders": {},
         "Users": {},
@@ -77,7 +84,8 @@
                 "AddCategory": "Añadir Categoría",
                 "EditCategory": "Editar Categoría",
                 "Required": "Este campo es requerido",
-                "Category": "Categoría"
+                "Category": "Categoría",
+                "UploadIcon": "Subir Icono"
             }
         }
     },

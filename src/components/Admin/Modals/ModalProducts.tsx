@@ -11,21 +11,16 @@ import * as S from "./Modal.styled";
 import { useFormik } from "formik";
 import * as Yup from "yup";
 import { useState } from "react";
-import { IProductAPI } from "@/types/Product.interface";
+import { IProductAPI, IProductCategory } from "@/types/Product.interface";
 import Snack from "@/utils/snack/snack";
 import { getSizeOnMb } from "@/utils";
 import { productApi } from "@/api/products";
 import { useRouter } from "next/navigation";
 
-interface Category {
-    id: number;
-    name: string;
-}
-
 type Props = {
     open: boolean;
     handleModalClose: () => void;
-    categories: Category[];
+    categories: IProductCategory[];
 };
 
 const ModalProducts = ({ open, handleModalClose, categories }: Props) => {
@@ -37,7 +32,7 @@ const ModalProducts = ({ open, handleModalClose, categories }: Props) => {
     const formik = useFormik({
         initialValues: {
             name: "",
-            category: "" as Category | any,
+            category: "" as IProductCategory | any,
             price: "",
             description: "",
             stock: "",
@@ -83,7 +78,7 @@ const ModalProducts = ({ open, handleModalClose, categories }: Props) => {
                 setImage(reader.result);
                 formik.setFieldValue("image", file.name);
                 formik.setFieldTouched("image", true);
-                formik.setFieldError("image", "");
+                formik.setFieldError("image", "Invalid image");
             }
         };
     };
@@ -152,7 +147,7 @@ const ModalProducts = ({ open, handleModalClose, categories }: Props) => {
                                     )
                                 }
                             >
-                                {categories.map((category: Category) => (
+                                {categories.map((category: IProductCategory) => (
                                     <MenuItem
                                         key={category.id}
                                         value={category.name}

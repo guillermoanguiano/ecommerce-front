@@ -19,21 +19,12 @@ export async function generateMetadata({
     };
 }
 
-const getCategories = async () => {
-    try {
-        const data = await productApi.getCategories();
-        return data;
-    } catch (error) {
-        throw new Error("Something went wrong");
-    }
-};
-
 export default async function ProductsPage({
     searchParams,
 }: {
     searchParams?: { [key: string]: string | undefined };
 }) {
-    const categories = await getCategories();
+    const categories = await productApi.getCategories();
     const { page, limit } = searchParams!;
     const products = await productApi.getProducts(page, limit);
     // console.log(products, categories);

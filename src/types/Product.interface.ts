@@ -22,7 +22,7 @@ interface IProductAPI {
 }
 
 interface IProductCategory {
-    id: number;
+    id?: number;
     name: string;
     icon: string;
 }

@@ -1,18 +1,14 @@
 import React, { useState } from "react";
-import {
-    Dialog,
-    FormControl,
-    InputLabel,
-    MenuItem,
-    Select,
-    Typography,
-} from "@mui/material";
+import { Button, Dialog, Typography } from "@mui/material";
 import * as S from "./Modal.styled";
 import { useTranslations } from "next-intl";
 import { useFormik } from "formik";
 import * as Yup from "yup";
 import { productApi } from "@/api/products";
 import Snack from "@/utils/snack/snack";
+import { getSizeOnMb } from "@/utils";
+import { CloudUpload } from "@mui/icons-material";
+import { IProductCategory } from "@/types/Product.interface";
 
 type Props = {
     open: boolean;
@@ -21,30 +17,33 @@ type Props = {
 
 const ModalCategories = ({ open, handleModalClose }: Props) => {
     const [loading, setLoading] = useState(false);
+    const [image, setImage] = useState<any>();
     const t = useTranslations("Admin.Modals.Categories");
 
     const formik = useFormik({
         initialValues: {
             category: "",
-            icon: "",
+            icon: "" as any,
         },
         validationSchema: Yup.object().shape({
             category: Yup.string().required(t("Required")),
         }),
         onSubmit: async (values) => {
             setLoading(true);
-            const category = values.category;
-            const icon = values.icon;
-            await saveCategory(category, icon);
+            const category = {
+                name: values.category,
+                icon: image as string
+            }
+            await saveCategory(category);
             formik.resetForm();
             handleClose();
             setLoading(false);
         },
     });
 
-    const saveCategory = async (name: string, icon: string) => {
+    const saveCategory = async (values: IProductCategory) => {
         try {
-            const res = await productApi.addCategory(name, icon);
+            const res = await productApi.addCategory(values);
             if (res.ok) {
                 Snack.success(t("CategoryAdded"));
                 console.log(res);
@@ -56,6 +55,25 @@ const ModalCategories = ({ open, handleModalClose }: Props) => {
             console.log(error);
             Snack.error(t("ErrorAddingCategory"));
         }
+    };
+
+    const getFile = (e: React.ChangeEvent<HTMLInputElement>) => {
+        const target = e.target as HTMLInputElement & { files: FileList };
+        const file = target.files[0];
+        const reader = new FileReader();
+        reader.readAsDataURL(file);
+        reader.onloadend = () => {
+            const sizeMB = getSizeOnMb(reader.result as string);
+            if (sizeMB > 5) {
+                Snack.error(t("ImageTooLarge"));
+                return;
+            } else {
+                setImage(reader.result);
+                formik.setFieldValue("icon", file.name);
+                formik.setFieldTouched("icon", true);
+                formik.setFieldError("icon", "");
+            }
+        };
     };
 
     const handleClose = () => {
@@ -88,27 +106,30 @@ const ModalCategories = ({ open, handleModalClose }: Props) => {
                                 formik.errors.category
                             }
                         />
-                        <S.InputText
-                            label={"Icon"}
-                            variant="outlined"
-                            fullWidth
-                            type="text"
-                            id="icon"
-                            name="icon"
-                            value={formik.values.icon}
-                            onChange={formik.handleChange}
-                            error={
-                                !!(
-                                    formik.touched.icon &&
-                                    formik.errors.icon
-                                )
-                            }
-                            helperText={
-                                formik.touched.icon &&
-                                formik.errors.icon
-                            }
-                        />
-                        {/* TODO: Cambiar el servicio del lado del back a subir category-icons a cloudinary entonces tendriamos imagenes de categorias */}
+
+                        <Button
+                            component="label"
+                            htmlFor="icon"
+                            role={undefined}
+                            variant="contained"
+                            tabIndex={-1}
+                            startIcon={<CloudUpload />}
+                            sx={{ width: "100%" }}
+                            color="info"
+                        >
+                            {formik.values.icon || t("UploadIcon")}
+                            <S.hiddenInput
+                                type="file"
+                                onChange={getFile}
+                                name="icon"
+                                id="icon"
+                                accept="image/png, image/icon"
+                                value={formik.values.icon.name}
+                                onError={() =>
+                                    formik.setFieldError("icon", "Invalid icon")
+                                }
+                            />
+                        </Button>
                     </S.Rows>
 
                     <S.SaveButton

@@ -36,6 +36,7 @@
         "Menu": {
             "dashboard": "Dashboard",
             "products": "Products",
+            "categories": "Categories",
             "orders": "Orders",
             "users": "Users"
         },
@@ -57,6 +58,12 @@
             "ProductDeleted": "Product deleted successfully",
             "ErrorDeletingProduct": "Error deleting product"
         },
+        "Categories": {
+            "Categories": "Categories",
+            "AddCategory": "Add Category",
+            "EditCategory": "Edit Category",
+            "Required": "This field is required"
+        },
         "Orders": {
             
         },
@@ -73,15 +80,18 @@
                 "Stock": "Stock",
                 "ImageTooLarge": "Error uploading image",
                 "ProductAdded": "Product added successfully",
-                "ErrorAddingProduct": "Error adding product"
+                "ErrorAddingProduct": "Error adding product",
+                "Required": "This field is required",
+                "Category": "Category"
             },
-            "Categorys": {
+            "Categories": {
                 "CategoryAdded": "Category added successfully",
                 "ErrorAddingCategory": "Error adding category",
                 "AddCategory": "Add Category",
                 "EditCategory": "Edit Category",
                 "Required": "This field is required",
-                "Category": "Category"
+                "Category": "Category",
+                "UploadIcon": "Upload Icon"
             }
         }
     },

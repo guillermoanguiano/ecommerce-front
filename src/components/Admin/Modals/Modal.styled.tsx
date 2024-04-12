@@ -88,7 +88,7 @@ const FileButton = style.div`
     display: flex;
     align-items: center;
     justify-content: center;
-    width: 16rem;
+    width: 100%;
     background-color: #f3f4f6;
     border-radius: 0.75rem;
     margin: 1rem auto;
@@ -97,7 +97,7 @@ const FileButton = style.div`
         display: flex;
         flex-direction: column;
         align-items: center;
-        width: 16rem;
+        width: 100%;
         padding: 1.5rem 1rem;
         background-color: white;
         color: #3490dc;
@@ -127,4 +127,16 @@ const FileButton = style.div`
     }
 `;
 
-export { Form, Rows, InputText, Input, SaveButton, ModalContainer, FileButton };
+const hiddenInput = styled('input')({
+    clip: 'rect(0 0 0 0)',
+    clipPath: 'inset(50%)',
+    height: 1,
+    overflow: 'hidden',
+    position: 'absolute',
+    bottom: 0,
+    left: 0,
+    whiteSpace: 'nowrap',
+    width: 1,
+  });
+
+export { Form, Rows, InputText, Input, SaveButton, ModalContainer, FileButton, hiddenInput };

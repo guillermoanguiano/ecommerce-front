@@ -1,4 +1,4 @@
-import { IProductAPI } from "@/types/Product.interface";
+import { IProductAPI, IProductCategory } from "@/types/Product.interface";
 
 export const productApi = {
     addProduct: async (values: IProductAPI) => {
@@ -33,13 +33,13 @@ export const productApi = {
         const data = await res.json();
         return data;
     },
-    addCategory: async (name: string, icon: string) => {
+    addCategory: async (values: IProductCategory) => {
         const res = await fetch("http://localhost:4000/api/categories", {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",
             },
-            body: JSON.stringify({ name, icon }),
+            body: JSON.stringify(values),
         });
         return res;
     },

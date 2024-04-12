@@ -13,14 +13,14 @@ import {
 import React, { useState } from "react";
 import * as S from "./Menu.styled";
 import { useTranslations } from "next-intl";
-import { AddBusiness, Home, People, ShoppingBag } from "@mui/icons-material";
+import { AddBusiness, Class, Home, People, ShoppingBag } from "@mui/icons-material";
 import Image from "next/image";
 import Link from "next/link";
 import { usePathname, useRouter } from "@/navigation";
 import Navbar from "../Navbar/Navbar";
 
 // Change this to dynamic link
-const links = ["dashboard", "products", "orders", "users"];
+const links = ["dashboard", "products", "categories", "orders", "users"];
 
 type Props = {
     children: React.ReactNode;
@@ -38,6 +38,7 @@ const Menu = ({ children, locale: lang }: Props) => {
     const list = [
         { text: text("dashboard"), icon: <Home /> },
         { text: text("products"), icon: <AddBusiness /> },
+        { text: text("categories"), icon: <Class /> },
         { text: text("orders"), icon: <ShoppingBag /> },
         { text: text("users"), icon: <People /> },
     ];

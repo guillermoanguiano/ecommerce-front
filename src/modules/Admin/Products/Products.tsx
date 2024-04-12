@@ -43,19 +43,6 @@ const Products = (props: Props) => {
                 <Box sx={{ display: "flex", gap: "1rem" }}>
                     <S.AddButton
                         variant="contained"
-                        sx={{
-                            backgroundColor: "#FFF",
-                            color: theme.palette.primary.dark,
-                            "&:hover": {
-                                backgroundColor: "#F1F1F1",
-                            },
-                        }}
-                        onClick={handleModalCategories}
-                    >
-                        {t("AddCategory")}
-                    </S.AddButton>
-                    <S.AddButton
-                        variant="contained"
                         onClick={handleModalProducts}
                     >
                         {t("AddProduct")}
@@ -69,11 +56,6 @@ const Products = (props: Props) => {
                 open={modalProducts}
                 handleModalClose={handleModalProducts}
                 categories={props.categories}
-            />
-
-            <ModalCategories
-                open={modalCategories}
-                handleModalClose={handleModalCategories}
             />
         </Box>
     );
