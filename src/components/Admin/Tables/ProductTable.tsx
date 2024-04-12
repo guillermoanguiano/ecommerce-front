@@ -17,7 +17,7 @@ import * as S from "./ProductTable.styled";
 import { convertToMoney } from "@/utils";
 import { useTranslations } from "next-intl";
 import { useRouter, useSearchParams } from "next/navigation";
-import { productApi } from "@/api/admin/products";
+import { productApi } from "@/api/products";
 import Snack from "@/utils/snack/snack";
 
 type Props = {

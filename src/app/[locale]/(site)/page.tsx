@@ -1,9 +1,7 @@
+import { productApi } from "@/api/products";
+import Home from "@/modules/Home/Home";
 
-
-export default function HomePage() {
-  return (
-    <div>
-      <h1>Hello Page</h1>
-    </div>
-  );
+export default async function HomePage() {
+    const categories = await productApi.getCategories();
+    return <Home categories={categories} />;
 }

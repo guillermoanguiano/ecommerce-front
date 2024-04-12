@@ -1,4 +1,4 @@
-import { productApi } from "@/api/admin/products";
+import { productApi } from "@/api/products";
 import Products from "@/modules/Admin/Products/Products";
 import { Metadata } from "next";
 import { getTranslations } from "next-intl/server";

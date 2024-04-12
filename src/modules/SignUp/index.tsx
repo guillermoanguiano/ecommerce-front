@@ -18,7 +18,7 @@ import React, { useState } from "react";
 import { User } from "@/types/User.interface";
 import { useRouter } from "next/navigation";
 import Snack from "@/utils/snack/snack";
-import { usersApi } from "@/api/admin/users";
+import { usersApi } from "@/api/users";
 
 type Props = {
     locale: string;

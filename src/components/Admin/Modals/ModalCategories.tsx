@@ -4,7 +4,7 @@ import * as S from "./Modal.styled";
 import { useTranslations } from "next-intl";
 import { useFormik } from "formik";
 import * as Yup from "yup";
-import { productApi } from "@/api/admin/products";
+import { productApi } from "@/api/products";
 import Snack from "@/utils/snack/snack";
 
 type Props = {

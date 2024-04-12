@@ -14,7 +14,7 @@ import { useState } from "react";
 import { IProductAPI } from "@/types/Product.interface";
 import Snack from "@/utils/snack/snack";
 import { getSizeOnMb } from "@/utils";
-import { productApi } from "@/api/admin/products";
+import { productApi } from "@/api/products";
 import { useRouter } from "next/navigation";
 
 interface Category {

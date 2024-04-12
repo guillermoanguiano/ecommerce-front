@@ -1,11 +1,9 @@
-import React from 'react'
-// TODO: add loading HINT: SyncLoader
-type Props = {}
+import { CircularProgress } from "@mui/material";
 
-const Loading = (props: Props) => {
-  return (
-    <div>Loading</div>
-  )
+export default function Loading() {
+    return (
+        <CircularProgress
+            sx={{ position: "absolute", top: "50%", left: "50%" }}
+        />
+    );
 }
-
-export default Loading
