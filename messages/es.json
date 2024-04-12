@@ -27,6 +27,11 @@
         "success": "El usuario ha sido creado con éxito",
         "error": "El usuario no pudo ser creado"
     },
+    "Navbar": {
+        "signIn": "Cerrar Sesión",
+        "signOut": "Cerrar Sesión",
+        "profile": "Mi Perfil"
+    },
     "Admin": {
         "Menu": {
             "dashboard": "Panel",

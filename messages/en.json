@@ -27,6 +27,11 @@
         "success": "The user was created successfully",
         "error": "The user could not be created"
     },
+    "Navbar": { 
+        "signIn": "Sign In",
+        "signOut": "Sign Out",
+        "profile": "Profile"
+    },
     "Admin": {
         "Menu": {
             "dashboard": "Dashboard",

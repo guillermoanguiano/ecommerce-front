@@ -1,6 +1,8 @@
 import Navbar from "@/components/Navbar/Navbar";
+import { authOptions } from "@/utils/options";
 import { Box } from "@mui/material";
 import { Metadata } from "next";
+import { getServerSession } from "next-auth";
 import { getTranslations } from "next-intl/server";
 
 export async function generateMetadata({
@@ -24,6 +26,7 @@ export default async function SiteLayout({
 }: {
     children: React.ReactNode;
 }) {
+    const session = await getServerSession(authOptions);
     return (
         <Box
             sx={{
@@ -32,7 +35,7 @@ export default async function SiteLayout({
                 minHeight: "100vh",
             }}
         >
-            <Navbar />
+            <Navbar session={session} />
 
             <Box sx={{ padding: "0 2rem", paddingTop: "2rem" }}>{children}</Box>
         </Box>

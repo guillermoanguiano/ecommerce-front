@@ -27,17 +27,19 @@ export const productApi = {
         return res;
     },
     getCategories: async () => {
-        const res = await fetch("http://localhost:4000/api/categories",{ cache: "no-store" });
+        const res = await fetch("http://localhost:4000/api/categories", {
+            cache: "no-store",
+        });
         const data = await res.json();
         return data;
     },
-    addCategory: async (name: string) => {
+    addCategory: async (name: string, icon: string) => {
         const res = await fetch("http://localhost:4000/api/categories", {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",
             },
-            body: JSON.stringify({ name }),
+            body: JSON.stringify({ name, icon }),
         });
         return res;
     },

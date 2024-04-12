@@ -4,7 +4,7 @@ import {
     InputLabel,
     MenuItem,
     Select,
-    Typography
+    Typography,
 } from "@mui/material";
 import { useTranslations } from "next-intl";
 import * as S from "./Modal.styled";

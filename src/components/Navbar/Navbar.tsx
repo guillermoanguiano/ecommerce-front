@@ -7,25 +7,32 @@ import { User } from "@/types/User.interface";
 import Link from "next/link";
 import { useEffect, useState } from "react";
 import Image from "next/image";
+import { Session } from "next-auth";
+import { useRouter } from "next/navigation";
+import { useTranslations } from "next-intl";
 
-type Props = {};
+type Props = {
+    session: Session | null;
+};
 
-const Navbar = (props: Props) => {
-    const { data: session } = useSession();
-    const [user, setUser] = useState<User>();
-
-    useEffect(() => {
-        if (session) {
-            setUser(session.user as unknown as User);
-        } else {
-            setUser(undefined);
-        }
-    }, [session]);
+const Navbar = ({ session }: Props) => {
+    const t = useTranslations("Navbar");
+    const router = useRouter();
+    const user = session?.user;
 
     return (
         <Box component="header" sx={{ width: "100%" }}>
-            <AppBar position="static" sx={{ backgroundColor: "#fff", boxShadow: "none", py: 1 }}>
-                <Toolbar sx={{ display: "flex", alignItems: "center" }}>
+            <AppBar
+                position="static"
+                sx={{ backgroundColor: "#fff", boxShadow: "none", py: 1 }}
+            >
+                <Toolbar
+                    sx={{
+                        display: "flex",
+                        alignItems: "center",
+                        justifyContent: "space-between",
+                    }}
+                >
                     <Link style={{ maxHeight: "3rem" }} href="/admin/dashboard">
                         <Image
                             src="/logo.png"
@@ -41,7 +48,7 @@ const Navbar = (props: Props) => {
                             }}
                         />
                     </Link>
-                    <S.Search>
+                    <S.Search sx={{ display: { xs: "none", md: "flex" } }}>
                         <S.SearchIconWrapper>
                             <SearchIcon />
                         </S.SearchIconWrapper>
@@ -51,18 +58,32 @@ const Navbar = (props: Props) => {
                         />
                     </S.Search>
 
-                    {user ? (
-                        <Button
-                            sx={{ color: "#000", fontWeight: "bold" }}
-                            onClick={() => signOut()}
-                        >
-                            Logout
-                        </Button>
-                    ) : (
-                        <Button sx={{ color: "#000", fontWeight: "bold" }}>
-                            <Link href="/login">Login</Link>
-                        </Button>
-                    )}
+                    <S.Links>
+                        {user?.admin && (
+                            <Button
+                                onClick={() => router.push("/admin/dashboard")}
+                                style={{
+                                    color: "#000",
+                                    fontWeight: "bold",
+                                    textDecoration: "none",
+                                }}
+                            >
+                                Admin
+                            </Button>
+                        )}
+                        {user ? (
+                            <Button
+                                sx={{ color: "#000", fontWeight: "bold", minWidth: "10rem", justifyContent: "flex-end" }}
+                                onClick={() => signOut()}
+                            >
+                                {t("signOut")}
+                            </Button>
+                        ) : (
+                            <Button sx={{ color: "#000", fontWeight: "bold" }}>
+                                <Link href="/login">{t("signIn")}</Link>
+                            </Button>
+                        )}
+                    </S.Links>
                 </Toolbar>
             </AppBar>
         </Box>

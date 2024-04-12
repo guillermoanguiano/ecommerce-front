@@ -1,17 +1,11 @@
+"use client";
 import { IProductCategory } from "@/types/Product.interface";
-import { FoodBank, Laptop, LocalDrink, Smartphone } from "@mui/icons-material";
 import { Box, Typography } from "@mui/material";
 import Image from "next/image";
 import Link from "next/link";
+import * as S from "./Home.styled";
 import React from "react";
-
-// TODO: Upload icons to the cloud and get the link via API
-const Icons: any = {
-  "Celulares": <Smartphone fontSize="large" />,
-  "Tablets": <Laptop fontSize="large" />,
-  "Comida": <FoodBank fontSize="large" />,
-  "Bebidas": <LocalDrink fontSize="large" />,
-}
+import IconMapper from "@/utils/constants/IconMapper";
 
 type Props = {
     categories: IProductCategory[];
@@ -43,36 +37,20 @@ const Home = ({ categories }: Props) => {
                     Select Categories
                 </Typography>
 
-                <Box mt={2} sx={{ display: "flex", gap: "1rem", flexWrap: "wrap", width: "100%", justifyContent: "center" }}>
+                <S.ContainerCategories>
                     {categories.map((category) => (
                         <Link
                             key={category.id}
                             href={`/products/${category.id}`}
                             style={{ textDecoration: "none", width: "10rem" }}
                         >
-                            <Box
-                                sx={{
-                                    width: "100%",
-                                    display: "flex",
-                                    flexDirection: "column-reverse",
-                                    alignItems: "center",
-                                    justifyContent: "space-between",
-                                    padding: "0.5rem 1rem",
-                                    borderRadius: "0.75rem",
-                                    boxShadow:
-                                        "rgba(0, 0, 0, 0.24) 0.5px 3px 3px",
-                                    cursor: "pointer",
-                                    "&:hover": {
-                                        backgroundColor: "#f3f4f6",
-                                    },
-                                }}
-                            >
+                            <S.Category>
                                 <Typography>{category.name}</Typography>
-                                {Icons[category.name]}
-                            </Box>
+                                <IconMapper iconName={category.icon} />
+                            </S.Category>
                         </Link>
                     ))}
-                </Box>
+                </S.ContainerCategories>
             </Box>
         </React.Fragment>
     );

@@ -1,4 +1,4 @@
-import { InputBase } from "@mui/material";
+import { Box, InputBase } from "@mui/material";
 import { styled, alpha } from "@mui/material/styles";
 
 const Search = styled("div")(({ theme }) => ({
@@ -34,4 +34,11 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
   },
 }));
 
-export { Search, SearchIconWrapper, StyledInputBase };
+const Links = styled(Box)(({ theme }) => ({
+  display: "flex",
+  justifyContent: "space-between",
+  alignItems: "center",
+  marginLeft: "1rem"
+}))
+
+export { Search, SearchIconWrapper, StyledInputBase, Links };
