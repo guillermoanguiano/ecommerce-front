@@ -48,7 +48,7 @@ const Home = ({ categories }: Props) => {
                         <Link
                             key={category.id}
                             href={`/products/${category.id}`}
-                            style={{ textDecoration: "none" }}
+                            style={{ textDecoration: "none", width: "10rem" }}
                         >
                             <Box
                                 sx={{
