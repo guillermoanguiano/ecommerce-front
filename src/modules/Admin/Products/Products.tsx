@@ -4,7 +4,7 @@ import { Box, Button, Stack, Typography, useTheme } from "@mui/material";
 import { useTranslations } from "next-intl";
 import ModalCategories from "@/components/Admin/Modals/ModalCategories";
 import ModalProducts from "@/components/Admin/Modals/ModalProducts";
-import ProductTable from "@/components/Admin/Tables/ProductTable";
+import ProductTable from "@/components/Admin/Tables/ProductTable/ProductTable";
 import * as S from "./Products.styled";
 import { IProductCategory, IProductResponse } from "@/types/Product.interface";
 

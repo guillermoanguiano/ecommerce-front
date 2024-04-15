@@ -1,14 +1,15 @@
 "use client";
-import React, { useState } from 'react'
-import { Box, Stack, Typography, useTheme } from '@mui/material';
-import { useTranslations } from 'next-intl';
-import * as S from './Categories.styled';
-import ModalCategories from '@/components/Admin/Modals/ModalCategories';
-import { IProductCategory } from '@/types/Product.interface';
+import React, { useState } from "react";
+import { Box, Stack, Typography, useTheme } from "@mui/material";
+import { useTranslations } from "next-intl";
+import * as S from "./Categories.styled";
+import ModalCategories from "@/components/Admin/Modals/ModalCategories";
+import { IProductCategory } from "@/types/Product.interface";
+import CategoriesTable from "@/components/Admin/Tables/CategoryTable/CategoryTable";
 
 type Props = {
     categories: IProductCategory[];
-}
+};
 
 const Categories = (props: Props) => {
     const [modalCategories, setModalCategories] = useState(false);
@@ -41,14 +42,16 @@ const Categories = (props: Props) => {
                 </Box>
             </Stack>
 
-            {JSON.stringify(props.categories)}
+            <Box sx={{ margin: "0 2.5rem" }}>
+                <CategoriesTable categories={props.categories} />
+            </Box>
 
             <ModalCategories
                 open={modalCategories}
                 handleModalClose={handleModalCategories}
             />
         </Box>
-  )
-}
+    );
+};
 
-export default Categories
+export default Categories;
