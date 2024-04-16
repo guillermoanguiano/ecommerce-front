@@ -8,7 +8,10 @@ import {
     CardMedia,
     Divider,
     Grid,
+    MenuItem,
     Pagination,
+    Select,
+    SelectChangeEvent,
     Typography,
 } from "@mui/material";
 import Image from "next/image";
@@ -42,15 +45,23 @@ const ProductTable = ({ products }: Props) => {
         } catch (error) {
             Snack.error(t("ErrorDeletingProduct"));
         }
+    };
 
-    }
-
-    const handleChangePage = (event: React.ChangeEvent<unknown>, value: number) => {
+    const handleChangePage = (
+        event: React.ChangeEvent<unknown>,
+        value: number
+    ) => {
         router.push(`?page=${value}&limit=${limit}`);
+    };
+
+    const handleChangeLimit = (event: SelectChangeEvent) => {
+        console.log(event.target.value);
+        router.push(`?page=1&limit=${event.target.value}`);
+        router.refresh();
     }
 
     return (
-        <S.ContainerTable >
+        <S.ContainerTable>
             <Grid
                 container
                 spacing={{ xs: 2, md: 2 }}
@@ -70,14 +81,22 @@ const ProductTable = ({ products }: Props) => {
                                         style={{
                                             objectFit: "cover",
                                             width: "14rem",
-                                            maxHeight: "100%", 
+                                            maxHeight: "100%",
                                             height: "14rem",
                                         }}
                                     />
                                 </S.CardBox>
                             </CardMedia>
-                            <CardContent >
-                                <Typography gutterBottom variant="h6" sx={{ overflow: "hidden", textOverflow: "ellipsis", whiteSpace: "nowrap" }}>
+                            <CardContent>
+                                <Typography
+                                    gutterBottom
+                                    variant="h6"
+                                    sx={{
+                                        overflow: "hidden",
+                                        textOverflow: "ellipsis",
+                                        whiteSpace: "nowrap",
+                                    }}
+                                >
                                     {product.name}
                                 </Typography>
                                 <Typography variant="body2" fontWeight={"bold"}>
@@ -102,9 +121,7 @@ const ProductTable = ({ products }: Props) => {
                                 <S.EditButton
                                     variant="outlined"
                                     size="small"
-                                    startIcon={
-                                        <S.EditIcon />
-                                    }
+                                    startIcon={<S.EditIcon />}
                                 >
                                     {t("EditProduct")}
                                 </S.EditButton>
@@ -113,9 +130,7 @@ const ProductTable = ({ products }: Props) => {
                                     variant="outlined"
                                     size="small"
                                     onClick={() => handleDelete(product.id)}
-                                    startIcon={
-                                        <S.DeleteIcon />
-                                    }
+                                    startIcon={<S.DeleteIcon />}
                                 >
                                     {t("DeleteProduct")}
                                 </Button>
@@ -128,14 +143,33 @@ const ProductTable = ({ products }: Props) => {
             <Box mt={2}>
                 <Divider sx={{ mb: 2 }} />
 
-                <Pagination
-                    count={Math.ceil(total / limit)}
-                    variant="outlined"
-                    shape="rounded"
-                    onChange={handleChangePage}
-                />
-            </Box>
+                <Box sx={{ display: "flex", justifyContent: "space-between", alignItems: "center" }}>
+                    <Pagination
+                        count={Math.ceil(total / limit)}
+                        variant="outlined"
+                        shape="rounded"
+                        onChange={handleChangePage}
+                    />
 
+                    <Box
+                        sx={{
+                            display: "flex",
+                            gap: "1rem",
+                            alignItems: "center",
+                        }}
+                    >
+                        <Select
+                            value={String(limit)}
+                            onChange={handleChangeLimit}
+                        >
+                            <MenuItem value={10}>10</MenuItem>
+                            <MenuItem value={20}>20</MenuItem>
+                            <MenuItem value={50}>50</MenuItem>
+                        </Select>
+                        <p>{t("RowsPerPage")}</p>
+                    </Box>
+                </Box>
+            </Box>
         </S.ContainerTable>
     );
 };

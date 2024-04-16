@@ -19,30 +19,21 @@ type Props = {
 const CategoriesTable = ({ categories }: Props) => {
     return (
         <S.Container>
-            <Table>
+            <Table size="small">
                 <TableHead>
                     <TableRow>
+                        <TableCell>#</TableCell>
                         <TableCell>Name</TableCell>
-                        <TableCell>Icon</TableCell>
                         <TableCell align="right">Action</TableCell>
                     </TableRow>
                 </TableHead>
                 <TableBody>
                     {categories.map((category) => (
                         <TableRow key={category.id}>
+                            <TableCell>{category.id}</TableCell>
                             <TableCell>{category.name}</TableCell>
-                            <TableCell>
-                                <Image
-                                    src={category.icon}
-                                    alt={category.name}
-                                    width={50}
-                                    height={50}
-                                    style={{ objectFit: "contain" }}
-                                    priority
-                                />
-                            </TableCell>
                             <TableCell align="right" sx={{ display: "flex", gap: 1 }}>
-                                <Box sx={{ display: "flex", flexDirection: "column", gap: 1,  width: "20%" }}>
+                                <Box sx={{ display: "flex", gap: 1 }}>
                                     <Button
                                         variant="outlined"
                                         color="info"

@@ -40,20 +40,6 @@ const Home = ({ categories }: Props) => {
                     {categories.map((category) => (
                         <S.Category key={category.id}>
                             <Typography>{category.name}</Typography>
-                            <Image
-                                src={category.icon}
-                                alt={category.name}
-                                width={200}
-                                height={200}
-                                style={{
-                                    objectFit: "contain",
-                                    width: "10rem",
-                                    height: "10rem",
-                                    maxHeight: "100%",
-                                    maxWidth: "100%",
-                                }}
-                                priority
-                            />
                         </S.Category>
                     ))}
                 </S.ContainerCategories>

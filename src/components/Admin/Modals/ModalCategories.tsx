@@ -1,13 +1,11 @@
 import React, { useState } from "react";
-import { Button, Dialog, Typography } from "@mui/material";
+import { Dialog, Typography } from "@mui/material";
 import * as S from "./Modal.styled";
 import { useTranslations } from "next-intl";
 import { useFormik } from "formik";
 import * as Yup from "yup";
 import { productApi } from "@/api/products";
 import Snack from "@/utils/snack/snack";
-import { getSizeOnMb } from "@/utils";
-import { CloudUpload } from "@mui/icons-material";
 import { IProductCategory } from "@/types/Product.interface";
 
 type Props = {
@@ -22,8 +20,7 @@ const ModalCategories = ({ open, handleModalClose }: Props) => {
 
     const formik = useFormik({
         initialValues: {
-            category: "",
-            icon: "" as any,
+            category: ""
         },
         validationSchema: Yup.object().shape({
             category: Yup.string().required(t("Required")),
@@ -31,8 +28,7 @@ const ModalCategories = ({ open, handleModalClose }: Props) => {
         onSubmit: async (values) => {
             setLoading(true);
             const category = {
-                name: values.category,
-                icon: image as string
+                name: values.category
             }
             await saveCategory(category);
             formik.resetForm();
@@ -55,25 +51,6 @@ const ModalCategories = ({ open, handleModalClose }: Props) => {
             console.log(error);
             Snack.error(t("ErrorAddingCategory"));
         }
-    };
-
-    const getFile = (e: React.ChangeEvent<HTMLInputElement>) => {
-        const target = e.target as HTMLInputElement & { files: FileList };
-        const file = target.files[0];
-        const reader = new FileReader();
-        reader.readAsDataURL(file);
-        reader.onloadend = () => {
-            const sizeMB = getSizeOnMb(reader.result as string);
-            if (sizeMB > 5) {
-                Snack.error(t("ImageTooLarge"));
-                return;
-            } else {
-                setImage(reader.result);
-                formik.setFieldValue("icon", file.name);
-                formik.setFieldTouched("icon", true);
-                formik.setFieldError("icon", "");
-            }
-        };
     };
 
     const handleClose = () => {
@@ -106,30 +83,6 @@ const ModalCategories = ({ open, handleModalClose }: Props) => {
                                 formik.errors.category
                             }
                         />
-
-                        <Button
-                            component="label"
-                            htmlFor="icon"
-                            role={undefined}
-                            variant="contained"
-                            tabIndex={-1}
-                            startIcon={<CloudUpload />}
-                            sx={{ width: "100%" }}
-                            color="info"
-                        >
-                            {formik.values.icon || t("UploadIcon")}
-                            <S.hiddenInput
-                                type="file"
-                                onChange={getFile}
-                                name="icon"
-                                id="icon"
-                                accept="image/png, image/icon"
-                                value={formik.values.icon.name}
-                                onError={() =>
-                                    formik.setFieldError("icon", "Invalid icon")
-                                }
-                            />
-                        </Button>
                     </S.Rows>
 
                     <S.SaveButton

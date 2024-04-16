@@ -54,7 +54,8 @@
             "Stock": "Stock",
             "AddCategory": "Añadir Categoría",
             "ProductDeleted": "El producto ha sido eliminado con éxito",
-            "ErrorDeletingProduct": "Error al eliminar el producto"
+            "ErrorDeletingProduct": "Error al eliminar el producto",
+            "RowsPerPage": "Filas por página"
         },
         "Categories": {
             "Categories": "Listado de Categorías",

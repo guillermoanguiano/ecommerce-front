@@ -24,7 +24,6 @@ interface IProductAPI {
 interface IProductCategory {
     id?: number;
     name: string;
-    icon: string;
 }
 
 interface IProductResponse {

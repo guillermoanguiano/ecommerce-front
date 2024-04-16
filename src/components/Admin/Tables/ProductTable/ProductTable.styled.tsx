@@ -16,8 +16,8 @@ const EditButton = styled(Button)(({ theme }) => ({
 
 const ContainerTable = styled(Box)(({ theme }) => ({
     backgroundColor: "#fff",
-    borderRadius: "5px",
-    padding: "1rem",
+    borderRadius: "8px",
+    padding: "2rem",
     boxShadow: "rgba(0, 0, 0, 0.24) 0.5px 3px 3px",
     marginLeft: "2.5rem",
     marginRight: "2.5rem",
