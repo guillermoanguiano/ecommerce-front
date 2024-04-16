@@ -10,9 +10,12 @@ const ContainerCategories = styled(Box)(({ theme }) => ({
 }));
 
 const Category = styled(Box)(({ theme }) => ({
-    width: "100%",
     display: "flex",
     flexDirection: "column-reverse",
+    width: "12.5rem",
+    height: "12.5rem",
+    maxWidth: "100%",
+    maxHeight: "100%",
     alignItems: "center",
     justifyContent: "space-between",
     padding: "0.5rem 1rem",
@@ -21,7 +24,7 @@ const Category = styled(Box)(({ theme }) => ({
     cursor: "pointer",
     "&:hover": {
         backgroundColor: "#f3f4f6",
-    },
+    }
 }));
 
 export { ContainerCategories, Category };

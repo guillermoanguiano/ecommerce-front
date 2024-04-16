@@ -5,7 +5,6 @@ import Image from "next/image";
 import Link from "next/link";
 import * as S from "./Home.styled";
 import React from "react";
-import IconMapper from "@/utils/constants/IconMapper";
 
 type Props = {
     categories: IProductCategory[];
@@ -39,18 +38,31 @@ const Home = ({ categories }: Props) => {
 
                 <S.ContainerCategories>
                     {categories.map((category) => (
-                        <Link
-                            key={category.id}
-                            href={`/products/${category.id}`}
-                            style={{ textDecoration: "none", width: "10rem" }}
-                        >
-                            <S.Category>
-                                <Typography>{category.name}</Typography>
-                                <IconMapper iconName={category.icon} />
-                            </S.Category>
-                        </Link>
+                        <S.Category key={category.id}>
+                            <Typography>{category.name}</Typography>
+                            <Image
+                                src={category.icon}
+                                alt={category.name}
+                                width={200}
+                                height={200}
+                                style={{
+                                    objectFit: "contain",
+                                    width: "10rem",
+                                    height: "10rem",
+                                    maxHeight: "100%",
+                                    maxWidth: "100%",
+                                }}
+                                priority
+                            />
+                        </S.Category>
                     ))}
                 </S.ContainerCategories>
+            </Box>
+
+            <Box component={"section"} mt={3} width={"100%"}>
+                <Typography variant="h6" fontWeight="bold">
+                    Products
+                </Typography>
             </Box>
         </React.Fragment>
     );
