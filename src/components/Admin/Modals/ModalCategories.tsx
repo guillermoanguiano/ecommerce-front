@@ -15,7 +15,6 @@ type Props = {
 
 const ModalCategories = ({ open, handleModalClose }: Props) => {
     const [loading, setLoading] = useState(false);
-    const [image, setImage] = useState<any>();
     const t = useTranslations("Admin.Modals.Categories");
 
     const formik = useFormik({
@@ -32,7 +31,7 @@ const ModalCategories = ({ open, handleModalClose }: Props) => {
             }
             await saveCategory(category);
             formik.resetForm();
-            handleClose();
+            handleModalClose();
             setLoading(false);
         },
     });
@@ -53,12 +52,8 @@ const ModalCategories = ({ open, handleModalClose }: Props) => {
         }
     };
 
-    const handleClose = () => {
-        handleModalClose();
-    };
-
     return (
-        <Dialog open={open} onClose={handleClose}>
+        <Dialog open={open} onClose={handleModalClose}>
             <S.ModalContainer sx={{ gap: "1rem" }}>
                 <Typography variant="h6">{t("AddCategory")}</Typography>
                 <S.Form onSubmit={formik.handleSubmit}>
