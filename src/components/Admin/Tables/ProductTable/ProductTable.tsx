@@ -73,7 +73,7 @@ const ProductTable = ({ products }: Props) => {
                             <CardMedia>
                                 <S.CardBox>
                                     <Image
-                                        src={product.imageUrl}
+                                        src={product.imageUrls[0]}
                                         alt={product.name}
                                         height={150}
                                         width={350}
@@ -162,6 +162,7 @@ const ProductTable = ({ products }: Props) => {
                             value={String(limit)}
                             onChange={handleChangeLimit}
                         >
+                            <MenuItem value={1}>1</MenuItem>
                             <MenuItem value={10}>10</MenuItem>
                             <MenuItem value={20}>20</MenuItem>
                             <MenuItem value={50}>50</MenuItem>

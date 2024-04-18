@@ -1,8 +1,7 @@
 "use client";
 import React, { useState } from "react";
-import { Box, Button, Stack, Typography, useTheme } from "@mui/material";
+import { Box, Stack, Typography } from "@mui/material";
 import { useTranslations } from "next-intl";
-import ModalCategories from "@/components/Admin/Modals/ModalCategories";
 import ModalProducts from "@/components/Admin/Modals/ModalProducts";
 import ProductTable from "@/components/Admin/Tables/ProductTable/ProductTable";
 import * as S from "./Products.styled";
@@ -15,16 +14,10 @@ type Props = {
 
 const Products = (props: Props) => {
     const [modalProducts, setModalProducts] = useState(false);
-    const [modalCategories, setModalCategories] = useState(false);
-    const theme = useTheme();
     const t = useTranslations("Admin.Products");
 
     const handleModalProducts = () => {
         setModalProducts(!modalProducts);
-    };
-
-    const handleModalCategories = () => {
-        setModalCategories(!modalCategories);
     };
 
     return (

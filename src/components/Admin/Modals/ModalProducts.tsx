@@ -24,7 +24,7 @@ type Props = {
 };
 
 const ModalProducts = ({ open, handleModalClose, categories }: Props) => {
-    const [image, setImage] = useState<any>();
+    const [image, setImage] = useState<any[]>([]);
     const [loading, setLoading] = useState(false);
     const t = useTranslations("Admin.Modals.Products");
     const router = useRouter();
@@ -36,7 +36,7 @@ const ModalProducts = ({ open, handleModalClose, categories }: Props) => {
             price: "",
             description: "",
             stock: "",
-            image: "" as any,
+            image: [] as any,
         },
         validationSchema: Yup.object().shape({
             name: Yup.string().required("Name is required"),
@@ -44,20 +44,20 @@ const ModalProducts = ({ open, handleModalClose, categories }: Props) => {
             price: Yup.string().required("Price is required"),
             description: Yup.string().required("Description is required"),
             stock: Yup.string().required("Stock is required"),
-            image: Yup.string().required("Image is required"),
+            image: Yup.array().required("Image is required"),
         }),
         onSubmit: async (values) => {
             setLoading(true);
             const product = {
                 ...values,
-                image: image as string,
+                images: image as string[],
                 category: values.category,
                 stock: Number(values.stock),
             };
             console.log(values);
             await saveProduct(product);
             formik.resetForm();
-            setImage(null);
+            setImage([]);
             handleClose();
             setLoading(false);
             router.refresh();
@@ -66,21 +66,25 @@ const ModalProducts = ({ open, handleModalClose, categories }: Props) => {
 
     const getFile = (e: React.ChangeEvent<HTMLInputElement>) => {
         const target = e.target as HTMLInputElement & { files: FileList };
-        const file = target.files[0];
-        const reader = new FileReader();
-        reader.readAsDataURL(file);
-        reader.onloadend = () => {
-            const sizeMB = getSizeOnMb(reader.result as string);
-            if (sizeMB > 5) {
-                Snack.error(t("ImageTooLarge"));
-                return;
-            } else {
-                setImage(reader.result);
-                formik.setFieldValue("image", file.name);
-                formik.setFieldTouched("image", true);
-                formik.setFieldError("image", "Invalid image");
-            }
-        };
+        const files = Object.keys(target.files);
+        let names: string[] = [];
+        for (const file of files) {
+            names.push(target.files?.[Number(file)].name);
+            const img = target.files?.[Number(file)];
+            const reader = new FileReader();
+            reader.readAsDataURL(img);
+            reader.onloadend = () => {
+                const sizeMB = getSizeOnMb(reader.result as string);
+                if (sizeMB > 5) {
+                    Snack.error(t("ImageTooLarge"));
+                    return;
+                } else {
+                    setImage([ reader.result, ...image ]);
+                }
+            };
+        }
+        formik.setFieldValue("image", names);
+        formik.setFieldError("image", "Invalid image");
     };
 
     const saveProduct = async (values: IProductAPI) => {
@@ -102,7 +106,7 @@ const ModalProducts = ({ open, handleModalClose, categories }: Props) => {
     const handleClose = () => {
         handleModalClose();
         formik.resetForm();
-        setImage(null);
+        setImage([]);
     };
 
     return (
@@ -229,6 +233,7 @@ const ModalProducts = ({ open, handleModalClose, categories }: Props) => {
                                 id="image"
                                 type="file"
                                 name="image"
+                                multiple
                                 onChange={getFile}
                                 value={formik.values.image.name}
                                 style={{ display: "none" }}

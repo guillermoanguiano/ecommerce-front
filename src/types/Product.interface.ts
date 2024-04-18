@@ -5,8 +5,7 @@ interface IProduct {
     name: string;
     description: string;
     price: number | string;
-    imageUrl: string;
-    image?: string;
+    imageUrls: string[];
     category: string; 
     stock: number;
 }
@@ -16,7 +15,7 @@ interface IProductAPI {
     name: string;
     description: string;
     price: number | string;
-    image: string;
+    images: string[];
     category: string; 
     stock: number;
 }
